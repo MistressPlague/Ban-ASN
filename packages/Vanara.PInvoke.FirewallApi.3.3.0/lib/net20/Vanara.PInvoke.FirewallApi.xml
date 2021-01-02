@@ -1,0 +1,3333 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Vanara.PInvoke.FirewallApi
+</name>
+</assembly>
+<members>
+<member name="T:Vanara.PInvoke.FirewallApi.NET_FW_ACTION">
+ <summary>The <c>NET_FW_ACTION</c> enumerated type specifies the action for a rule or default setting.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_ACTION.NET_FW_ACTION_BLOCK">
+ <summary>Block traffic.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_ACTION.NET_FW_ACTION_ALLOW">
+ <summary>Allow traffic.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_ACTION.NET_FW_ACTION_MAX">
+ <summary>Maximum traffic.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NET_FW_AUTHENTICATE_TYPE">
+ <summary>
+ The <c>NET_FW_AUTHENTICATE_TYPE</c> enumerated type specifies the type of authentication which must occur in order for traffic to be allowed..
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_AUTHENTICATE_TYPE.NET_FW_AUTHENTICATE_NONE">
+ <summary>No security check is performed.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_AUTHENTICATE_TYPE.NET_FW_AUTHENTICATE_NO_ENCAPSULATION">
+ <summary>
+ The traffic is allowed if it is IPsec-protected with authentication and no encapsulation protection. This means that the peer is
+ authenticated, but there is no integrity protection on the data.
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_AUTHENTICATE_TYPE.NET_FW_AUTHENTICATE_WITH_INTEGRITY">
+ <summary>The traffic is allowed if it is IPsec-protected with authentication and integrity protection.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_AUTHENTICATE_TYPE.NET_FW_AUTHENTICATE_AND_NEGOTIATE_ENCRYPTION">
+ <summary>
+ The traffic is allowed if its is IPsec-protected with authentication and integrity protection. In addition, negotiation of
+ encryption protections on subsequent packets is requested.
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_AUTHENTICATE_TYPE.NET_FW_AUTHENTICATE_AND_ENCRYPT">
+ <summary>
+ The traffic is allowed if it is IPsec-protected with authentication, integrity and encryption protection since the very first packet.
+ </summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NET_FW_EDGE_TRAVERSAL_TYPE">
+ <summary>
+ The <c>NET_FW_EDGE_TRAVERSAL_TYPE</c> enumerated type specifies the conditions under which edge traversal traffic is allowed.
+ </summary>
+ <remarks>
+ In order for Windows Firewall to dynamically allow edge traversal traffic, the application must use the IPV6_PROTECTION_LEVEL socket
+ option on the listening socket and set it to <c>PROTECTION_LEVEL_UNRESTRICTED</c> only in the cases where edge traversal traffic
+ should be allowed. The Windows Firewall rule added for the application must then set its edge traversal option to
+ <c>NET_FW_EDGE_TRAVERSAL_TYPE_DEFER_TO_APP</c> or <c>NET_FW_EDGE_TRAVERSAL_TYPE_DEFER_TO_USER</c>.
+ </remarks>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_EDGE_TRAVERSAL_TYPE.NET_FW_EDGE_TRAVERSAL_TYPE_DENY">
+ <summary>
+ Edge traversal traffic is always blocked.This is the same as setting the EdgeTraversal property using INetFwRule to VARIANT_FALSE.
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_EDGE_TRAVERSAL_TYPE.NET_FW_EDGE_TRAVERSAL_TYPE_ALLOW">
+ <summary>
+ Edge traversal traffic is always allowed.This is the same as setting the EdgeTraversal property using INetFwRule to VARIANT_TRUE.
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_EDGE_TRAVERSAL_TYPE.NET_FW_EDGE_TRAVERSAL_TYPE_DEFER_TO_APP">
+ <summary>
+ Edge traversal traffic is allowed when the application sets the IPV6_PROTECTION_LEVEL socket option to
+ PROTECTION_LEVEL_UNRESTRICTED. Otherwise, it is blocked.
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_EDGE_TRAVERSAL_TYPE.NET_FW_EDGE_TRAVERSAL_TYPE_DEFER_TO_USER">
+ <summary>
+ The user is prompted whether to allow edge traversal traffic when the application sets the IPV6_PROTECTION_LEVEL socket option
+ to PROTECTION_LEVEL_UNRESTRICTED. If the user chooses to allow edge traversal traffic, the rule is modified to defer to the
+ application's settings.If the application has not set the IPV6_PROTECTION_LEVEL socket option to PROTECTION_LEVEL_UNRESTRICTED,
+ edge traversal traffic is blocked.In order to use this option, the firewall rule must have both the application path and
+ protocol scopes specified. This option cannot be used if port(s) are defined.
+ </summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NET_FW_IP_PROTOCOL">
+ <summary>
+ <para>
+ [The Windows Firewall API is available for use in the operating systems specified in the Requirements section. It may be altered or
+ unavailable in subsequent versions. For Windows Vista and later, use of the Windows Firewall with Advanced Security API is recommended.]
+ </para>
+ <para>
+ [The Windows Firewall API is available for use in the operating systems specified in the Requirements section. It may be altered or
+ unavailable in subsequent versions. For Windows Vista and later, use of the Windows Firewall with Advanced Security API is recommended.]
+ </para>
+ <para>The <c>NET_FW_IP_PROTOCOL</c> enumeration type specifies the Internet protocol.</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_IP_PROTOCOL.NET_FW_IP_PROTOCOL_ANY">
+ <summary/>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_IP_PROTOCOL.NET_FW_IP_PROTOCOL_TCP">
+ <summary>Transmission Control Protocol.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_IP_PROTOCOL.NET_FW_IP_PROTOCOL_UDP">
+ <summary>User Datagram Protocol.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NET_FW_IP_VERSION">
+ <summary>
+ <para>
+ [The Windows Firewall API is available for use in the operating systems specified in the Requirements section. It may be altered or
+ unavailable in subsequent versions. For Windows Vista and later, use of the Windows Firewall with Advanced Security API is recommended.]
+ </para>
+ <para>The <c>NET_FW_IP_VERSION</c> enumerated type specifies the IP version for a port.</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_IP_VERSION.NET_FW_IP_VERSION_V4">
+ <summary>The port supports IPv4.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_IP_VERSION.NET_FW_IP_VERSION_V6">
+ <summary>The port supports IPv6.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_IP_VERSION.NET_FW_IP_VERSION_ANY">
+ <summary>The port supports either version of IP.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_IP_VERSION.NET_FW_IP_VERSION_MAX">
+ <summary>This value is used for boundary checking only and is not valid for application programming.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NET_FW_MODIFY_STATE">
+ <summary>The NET_FW_MODIFY_STATE enumerated type specifies the effect of modifications to the current policy.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_MODIFY_STATE.NET_FW_MODIFY_STATE_OK">
+ <summary>Changing or adding a firewall rule or firewall group to the current profile will take effect.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_MODIFY_STATE.NET_FW_MODIFY_STATE_GP_OVERRIDE">
+ <summary>
+ Changing or adding a firewall rule or firewall group to the current profile will not take effect because the profile is
+ controlled by the group policy.
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_MODIFY_STATE.NET_FW_MODIFY_STATE_INBOUND_BLOCKED">
+ <summary>
+ Changing or adding a firewall rule or firewall group to the current profile will not take effect because unsolicited inbound
+ traffic is not allowed.
+ </summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NET_FW_POLICY_TYPE">
+ <summary>
+ <para>
+ [The Windows Firewall API is available for use in the operating systems specified in the Requirements section. It may be altered or
+ unavailable in subsequent versions. For Windows Vista and later, use of the Windows Firewall with Advanced Security API is recommended.]
+ </para>
+ <para>The <c>NET_FW_POLICY_TYPE</c> enumerated type specifies the type of policy.</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_POLICY_TYPE.NET_FW_POLICY_GROUP">
+ <summary>Policy type is group.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_POLICY_TYPE.NET_FW_POLICY_LOCAL">
+ <summary>Policy type is local.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_POLICY_TYPE.NET_FW_POLICY_EFFECTIVE">
+ <summary>Policy type is effective.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_POLICY_TYPE.NET_FW_POLICY_TYPE_MAX">
+ <summary>Used for boundary checking only. Not valid for application programming.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE">
+ <summary>
+ <para>
+ [The Windows Firewall API is available for use in the operating systems specified in the Requirements section. It may be altered or
+ unavailable in subsequent versions. For Windows Vista and later, use of the Windows Firewall with Advanced Security API is recommended.]
+ </para>
+ <para>The <c>NET_FW_PROFILE_TYPE</c> enumerated type specifies the type of profile.</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE.NET_FW_PROFILE_DOMAIN">
+ <summary>Profile type is domain.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE.NET_FW_PROFILE_STANDARD">
+ <summary>Profile type is standard.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE.NET_FW_PROFILE_CURRENT">
+ <summary>Profile type is current.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE.NET_FW_PROFILE_TYPE_MAX">
+ <summary>Used for boundary checking only. Not valid for application programming.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE2">
+ <summary>The <c>NET_FW_PROFILE_TYPE2</c> enumerated type specifies the type of profile.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE2.NET_FW_PROFILE2_ALL">
+ <summary/>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE2.NET_FW_PROFILE2_DOMAIN">
+ <summary>Profile type is domain.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE2.NET_FW_PROFILE2_PRIVATE">
+ <summary>Profile type is private. This profile type is used for home and other private network types.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE2.NET_FW_PROFILE2_PUBLIC">
+ <summary>Profile type is public. This profile type is used for public Internet access points.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NET_FW_RULE_CATEGORY">
+ <summary>The <c>NET_FW_RULE_CATEGORY</c> enumerated type specifies the firewall rule category.</summary>
+ <remarks>For more information about using <c>NET_FW_RULE_CATEGORY</c>, download the Windows Firewall and User Facing Impact document.</remarks>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_RULE_CATEGORY.NET_FW_RULE_CATEGORY_BOOT">
+ <summary>Specifies boot time filters.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_RULE_CATEGORY.NET_FW_RULE_CATEGORY_STEALTH">
+ <summary>Specifies stealth filters.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_RULE_CATEGORY.NET_FW_RULE_CATEGORY_FIREWALL">
+ <summary>Specifies firewall filters.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_RULE_CATEGORY.NET_FW_RULE_CATEGORY_CONSEC">
+ <summary>Specifies connection security filters.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_RULE_CATEGORY.NET_FW_RULE_CATEGORY_MAX">
+ <summary>Maximum value for testing purposes.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NET_FW_RULE_DIRECTION">
+ <summary>The <c>NET_FW_RULE_DIRECTION</c> enumerated type specifies the direction of traffic to which a rule applies.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_RULE_DIRECTION.NET_FW_RULE_DIR_IN">
+ <summary>The rule applies to inbound traffic.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_RULE_DIRECTION.NET_FW_RULE_DIR_OUT">
+ <summary>The rule applies to outbound traffic.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_RULE_DIRECTION.NET_FW_RULE_DIR_MAX">
+ <summary>This value is used for boundary checking only and is not valid for application programming.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NET_FW_SCOPE">
+ <summary>
+ <para>
+ [The Windows Firewall API is available for use in the operating systems specified in the Requirements section. It may be altered or
+ unavailable in subsequent versions. For Windows Vista and later, use of the Windows Firewall with Advanced Security API is recommended.]
+ </para>
+ <para>The <c>NET_FW_SCOPE</c> enumerated type specifies the scope of addresses from which a port can listen.</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_SCOPE.NET_FW_SCOPE_ALL">
+ <summary>Scope is all.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_SCOPE.NET_FW_SCOPE_LOCAL_SUBNET">
+ <summary>Scope is local subnet only.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_SCOPE.NET_FW_SCOPE_CUSTOM">
+ <summary>Scope is custom.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_SCOPE.NET_FW_SCOPE_MAX">
+ <summary>Used for boundary checking only. Not valid for application programming.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NET_FW_SERVICE_TYPE">
+ <summary>
+ <para>
+ [The Windows Firewall API is available for use in the operating systems specified in the Requirements section. It may be altered or
+ unavailable in subsequent versions. For Windows Vista and later, use of the Windows Firewall with Advanced Security API is recommended.]
+ </para>
+ <para>The <c>NET_FW_SERVICE_TYPE</c> enumerated type specifies the type of service.</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_SERVICE_TYPE.NET_FW_SERVICE_FILE_AND_PRINT">
+ <summary>Service type is File and Print Sharing.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_SERVICE_TYPE.NET_FW_SERVICE_UPNP">
+ <summary>Service type is UPnP Framework.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_SERVICE_TYPE.NET_FW_SERVICE_REMOTE_DESKTOP">
+ <summary>Service type is Remote Desktop.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_SERVICE_TYPE.NET_FW_SERVICE_NONE">
+ <summary>Not a valid service type. This is used to indicate that a port is not part of a service.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NET_FW_SERVICE_TYPE.NET_FW_SERVICE_TYPE_MAX">
+ <summary>Used for boundary checking only. Not valid for application programming.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.PAC_CHANGES_CALLBACK_FN">
+ <summary>
+ The <c>PAC_CHANGES_CALLBACK_FN</c> function is used to add custom behavior to the app container change notification process.
+ </summary>
+ <param name="context">TOptional context pointer.</param>
+ <param name="pChange"/>
+ <remarks>Call NetworkIsolationRegisterForAppContainerChanges to register this callback function.</remarks>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.PNETISO_EDP_ID_CALLBACK_FN">
+ <summary>Callback used by <see cref="M:Vanara.PInvoke.FirewallApi.NetworkIsolationGetEnterpriseIdAsync(System.String,Vanara.PInvoke.FirewallApi.NETISO_GEID,System.IntPtr,Vanara.PInvoke.FirewallApi.PNETISO_EDP_ID_CALLBACK_FN,Vanara.PInvoke.HANDLE@)"/>.</summary>
+ <param name="context">TOptional context pointer.</param>
+ <param name="wszEnterpriseId">The WSZ enterprise identifier.</param>
+ <param name="dwErr">The dw error.</param>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CREATION_TYPE">
+ <summary>
+ The <c>INET_FIREWALL_AC_CREATION_TYPE</c> enumeration specifies the type of app container creation events for which notifications
+ will be delivered.
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CREATION_TYPE.INET_FIREWALL_AC_NONE">
+ <summary>This value is reserved for system use.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CREATION_TYPE.INET_FIREWALL_AC_PACKAGE_ID_ONLY">
+ <summary>Notifications will be delivered when an app container is created with a package identifier.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CREATION_TYPE.INET_FIREWALL_AC_BINARY">
+ <summary>Notifications will be delivered when an app container is created with a binary path.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CREATION_TYPE.INET_FIREWALL_AC_MAX">
+ <summary>Maximum value for testing purposes.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NETISO_ERROR_TYPE">
+ <summary>The <c>NETISO_ERROR_TYPE</c> enumerated type specifies the type of error related to a network isolation operation.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NETISO_ERROR_TYPE.NETISO_ERROR_TYPE_NONE">
+ <summary>No error.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NETISO_ERROR_TYPE.NETISO_ERROR_TYPE_PRIVATE_NETWORK">
+ <summary>The failure was caused because the privateNetworkClientServer capability is missing.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NETISO_ERROR_TYPE.NETISO_ERROR_TYPE_INTERNET_CLIENT">
+ <summary>The failure was caused because the internetClient capability is missing.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NETISO_ERROR_TYPE.NETISO_ERROR_TYPE_INTERNET_CLIENT_SERVER">
+ <summary>The failure was caused because the internetClientServer capability is missing.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NETISO_ERROR_TYPE.NETISO_ERROR_TYPE_MAX">
+ <summary>Maximum value for testing purposes.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NETISO_FLAG">
+ <summary>The <c>NETISO_FLAG</c> enumerated type specifies whether binaries should be returned for app containers.</summary>
+ <remarks>
+ By default, binaries are not returned. <c>NETISO_FLAG_FORCE_COMPUTE_BINARIES</c> must be set in order for these to be returned.
+ </remarks>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NETISO_FLAG.NETISO_FLAG_FORCE_COMPUTE_BINARIES">
+ <summary>
+ Specifies that all binaries will be computed before the app container is returned.This flag should be set if the caller requires
+ up-to-date and complete information on app container binaries. If this flag is not set, returned data may be stale or incomplete.
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NETISO_FLAG.NETISO_FLAG_MAX">
+ <summary>Maximum value for testing purposes.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NETISO_GEID">
+ <summary>A bitmask value of control flags which specify the context of <see cref="M:Vanara.PInvoke.FirewallApi.NetworkIsolationGetEnterpriseIdAsync(System.String,Vanara.PInvoke.FirewallApi.NETISO_GEID,System.IntPtr,Vanara.PInvoke.FirewallApi.PNETISO_EDP_ID_CALLBACK_FN,Vanara.PInvoke.HANDLE@)"/>.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NETISO_GEID.NETISO_GEID_DEFAULT">
+ <summary>
+ Default API behavior. Returns the Enterprise ID for Enterprise resources. Returns NULL for Personal resources. For Neutral
+ resources, returns Enterprise ID if it is called from an Enterprise context, or returns NULL if it is called from a Personal context.
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NETISO_GEID.NETISO_GEID_FOR_WDAG">
+ <summary>Used in the context of the Windows Defender Application Guard (WDAG) scenario.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NETISO_GEID.NETISO_GEID_FOR_NEUTRAL_AWARE">
+ <summary>
+ Used by applications that are aware of neutral resources. For Neutral resources the API will return L”*”. For Enterprise
+ resources the API will return the Enterprise ID. For Personal resources the API will return NULL.
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.NETISO_GEID.NETISO_GEID_FORCE_TO_CHECK">
+ <summary>
+ Forces API to check the resource even in cases when neither Windows Information Protection nor Windows Defender Application
+ Guard are enabled.
+ </summary>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.NetworkIsolationEnumAppContainers(Vanara.PInvoke.FirewallApi.NETISO_FLAG,System.UInt32@,System.IntPtr@)">
+ <summary>
+ The <c>NetworkIsolationEnumAppContainers</c> function enumerates all of the app containers that have been created in the system.
+ </summary>
+ <param name="Flags">
+ <para>Type: <c>DWORD</c></para>
+ <para>
+ May be set to <c>NETISO_FLAG_FORCE_COMPUTE_BINARIES</c> to ensure that all binaries are computed before the app container is
+ returned. This flag should be set if the caller requires up-to-date and complete information on app container binaries. If this flag
+ is not set, returned data may be stale or incomplete.
+ </para>
+ <para>See NETISO_FLAG for more information.</para>
+ </param>
+ <param name="pdwNumPublicAppCs">
+ <para>Type: <c>DWORD*</c></para>
+ <para>The number of app containers in the <c>ppPublicAppCs</c> member.</para>
+ </param>
+ <param name="ppPublicAppCs">
+ <para>Type: <c>PINET_FIREWALL_APP_CONTAINER*</c></para>
+ <para>The list of app container structure elements.</para>
+ </param>
+ <returns>
+ <para>Type: <c>DWORD</c></para>
+ <para>Returns ERROR_SUCCESS if successful, or an error value otherwise.</para>
+ <para>ERROR_OUTOFMEMORY will be returned if memory is unavailable.</para>
+ </returns>
+ <remarks>If no app containers are installed on the system, ERROR_SUCCESS will still be returned (and ppPublicAppCs will be empty).</remarks>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.NetworkIsolationEnumerateAppContainerRules(System.Collections.IEnumerable@)">
+ <summary>The <c>NetworkIsolationEnumerateAppContainerRules</c> function enumerates all of the rules related to app containers.</summary>
+ <param name="newEnum">
+ <para>Type: <c>IEnumVARIANT**</c></para>
+ <para>Enumerator interface of an INetFwRule3 object that represents the rules enforcing app containers.</para>
+ </param>
+ <returns>
+ <para>Type: <c>HRESULT</c></para>
+ <para>If this function succeeds, it returns <c>S_OK</c>. Otherwise, it returns an <c>HRESULT</c> error code.</para>
+ </returns>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.NetworkIsolationGetEnterpriseIdAsync(System.String,Vanara.PInvoke.FirewallApi.NETISO_GEID,System.IntPtr,Vanara.PInvoke.FirewallApi.PNETISO_EDP_ID_CALLBACK_FN,Vanara.PInvoke.HANDLE@)">
+ <summary>
+ <para>
+ Gets the Enterprise ID based on Network Isolation endpoints in the context of the Windows Information Protection (WIP) or the
+ Windows Defender Application Guard (WDAG) scenarios. If neither WIP nor WDAG are on, the API returns NULL, unless the flag
+ <c>NETISO_GEID_FORCE_TO_CHECK</c> is passed. The Enterprise ID can be any string different from NULL or “*”.
+ </para>
+ <para>Example of NetworkIsolationGetEnterpriseIdAsync usage: https://github.com/microsoft/EnterpriseStateClassify</para>
+ </summary>
+ <param name="wszServerName">The name of the Enterprise Data Protection Server.</param>
+ <param name="dwFlags">
+ <para>A bitmask value of control flags which specify the context of the API call. May contain one or more of the following flags.</para>
+ <list type="table">
+ <listheader>
+ <term>Value</term>
+ <term>Meaning</term>
+ </listheader>
+ <item>
+ <term>NETISO_GEID_DEFAULT 0x00</term>
+ <term>
+ Default API behavior. Returns the Enterprise ID for Enterprise resources. Returns NULL for Personal resources. For Neutral
+ resources, returns Enterprise ID if it is called from an Enterprise context, or returns NULL if it is called from a Personal context.
+ </term>
+ </item>
+ <item>
+ <term>NETISO_GEID_FOR_WDAG 0x01</term>
+ <term>Used in the context of the Windows Defender Application Guard (WDAG) scenario.</term>
+ </item>
+ <item>
+ <term>NETISO_GEID_FOR_NEUTRAL_AWARE 0x02</term>
+ <term>
+ Used by applications that are aware of neutral resources. For Neutral resources the API will return L”*”. For Enterprise resources
+ the API will return the Enterprise ID. For Personal resources the API will return NULL.
+ </term>
+ </item>
+ <item>
+ <term>NETISO_GEID_FORCE_TO_CHECK 0x04</term>
+ <term>
+ Forces API to check the resource even in cases when neither Windows Information Protection nor Windows Defender Application Guard
+ are enabled.
+ </term>
+ </item>
+ </list>
+ </param>
+ <param name="context">Optional context pointer.</param>
+ <param name="callback">Function pointer that will be invoked when a notification is ready for delivery.</param>
+ <param name="hOperation">The handle for the Enterprise Data Protection Server endpoints.</param>
+ <returns>Returns ERROR_SUCCESS if successful, or an error value otherwise.</returns>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.NetworkIsolationGetEnterpriseIdClose(Vanara.PInvoke.HANDLE,System.Boolean)">
+ <summary>
+ <para>
+ This API is used for closing the handle returned by NetworkIsolationGetEnterpriseIdAsync as well as for synchronizing the operation.
+ </para>
+ <para>Example of NetworkIsolationGetEnterpriseIdClose usage: https://github.com/microsoft/EnterpriseStateClassify</para>
+ </summary>
+ <param name="hOperation">The handle to release.</param>
+ <param name="bWaitForOperation">Indicates whether to wait for synchronization.</param>
+ <returns>Returns ERROR_SUCCESS if successful, or an error value otherwise.</returns>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.NetworkIsolationSetAppContainerConfig(System.UInt32,System.IntPtr)">
+ <summary>The <c>NetworkIsolationSetAppContainerConfig</c> function is used to set the configuration of one or more app containers.</summary>
+ <param name="dwNumPublicAppCs">
+ <para>Type: <c>DWORD</c></para>
+ <para>The number of app containers in the <c>appContainerSids</c> member.</para>
+ </param>
+ <param name="appContainerSids">
+ <para>Type: <c>PSID_AND_ATTRIBUTES</c></para>
+ <para>The security identifiers (SIDs) of app containers that are allowed to send loopback traffic. Used for debugging purposes.</para>
+ </param>
+ <returns>
+ <para>Type: <c>DWORD</c></para>
+ <para>Returns ERROR_SUCCESS if successful, or an error value otherwise.</para>
+ </returns>
+ <remarks>
+ Note that it is the calling program's responsibility to first call the <c>NetworkIsolationGetAppContainerConfig</c> function in
+ order to retrieve and preserve the app container SIDs already configured to send loopback traffic.
+ </remarks>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.NetworkIsolationSetupAppContainerBinaries(Vanara.PInvoke.PSID,System.String,System.String,System.String,System.Boolean,System.String[],System.UInt32)">
+ <summary>
+ The <c>NetworkIsolationSetupAppContainerBinaries</c> function is used by software installers to provide information about the image
+ paths of applications that are running in an app container. This information is provided to third-party firewall applications about
+ the applications in order to enhance user experience and security decisions.
+ </summary>
+ <param name="applicationContainerSid">
+ <para>Type: <c>PSID</c></para>
+ <para>The package identifier of the app container.</para>
+ </param>
+ <param name="packageFullName">
+ <para>Type: <c>LPCWSTR</c></para>
+ <para>
+ A string representing the package identity of the app that owns this app container. Contains the 5-part tuple as individual fields
+ (name, version, architecture, resourceid, publisher).
+ </para>
+ </param>
+ <param name="packageFolder">
+ <para>Type: <c>LPCWSTR</c></para>
+ <para>The file location of the app that owns this app container.</para>
+ </param>
+ <param name="displayName">
+ <para>Type: <c>LPCWSTR</c></para>
+ <para>The friendly name of the app container.</para>
+ </param>
+ <param name="bBinariesFullyComputed">
+ <para>Type: <c>BOOL</c></para>
+ <para>True if the binary files are being provided by the caller; otherwise, false.</para>
+ </param>
+ <param name="binaries">
+ <para>Type: <c>LPCWSTR*</c></para>
+ <para>An array of paths to the applications running in the app container.</para>
+ </param>
+ <param name="binariesCount">
+ <para>Type: <c>DWORD</c></para>
+ <para>The number of paths contained in the binaries parameter.</para>
+ </param>
+ <returns>
+ <para>Type: <c>HRESULT</c></para>
+ <para>If the function succeeds, it returns S_OK.</para>
+ <para>
+ If the function fails, it returns an <c>HRESULT</c> value that indicates the error. For a list of common error codes, see Common
+ HRESULT Values.
+ </para>
+ </returns>
+ <remarks>
+ Applications creating an app container can use <c>NetworkIsolationSetupAppContainerBinaries</c> to provide third-party firewall
+ applications with the direct path to applications running inside that app container.
+ </remarks>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_BINARIES">
+ <summary>The <c>INET_FIREWALL_AC_BINARIES</c> structure contains the binary paths to applications running in an app container.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_BINARIES.count">
+ <summary>The number of paths in the <c>binaries</c> member.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_BINARIES.binaries">
+ <summary>Paths to the applications running in the app container.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CHANGE">
+ <summary>The INET_FIREWALL_AC_CHANGE structure contains information about a change made to an app container.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CHANGE.changeType">
+ <summary>
+ <para>Type: <c>INET_FIREWALL_AC_CHANGE_TYPE</c></para>
+ <para>The type of change made.</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CHANGE.createType">
+ <summary>
+ <para>Type: <c>INET_FIREWALL_AC_CREATION_TYPE</c></para>
+ <para>The method by which the app container was created.</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CHANGE.appContainerSid">
+ <summary>
+ <para>Type: <c>SID*</c></para>
+ <para>The package identifier of the app container</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CHANGE.userSid">
+ <summary>
+ <para>Type: <c>SID*</c></para>
+ <para>The security identifier (SID) of the user to whom the app container belongs.</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CHANGE.displayName">
+ <summary>
+ <para>Type: <c>LPWSTR</c></para>
+ <para>Friendly name of the app container.</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CHANGE.union">
+ <summary/>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CHANGE.UNIONType">
+ <summary/>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CHANGE.UNIONType.capabilities">
+ <summary>
+ <para>Type: <c>INET_FIREWALL_AC_CAPABILITIES</c></para>
+ <para>Information about the capabilities of the changed app container.</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CHANGE.UNIONType.binaries">
+ <summary>
+ <para>Type: <c>INET_FIREWALL_AC_BINARIES</c></para>
+ <para>Binary paths to the applications running in the changed app container.</para>
+ </summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INetFwAuthorizedApplication">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered Or
+ unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>
+ The <c>INetFwAuthorizedApplication</c> interface provides access to the properties of an application that has been authorized have
+ openings in the firewall.
+ </para>
+ </summary>
+ <remarks>
+ <para>When creating New applications, this interface Is supported by the HNetCfg.FwAuthorizedApplication COM object.</para>
+ <para>
+ For reading Or modifying existing applications, instances of this interface are retrieved through the INetFwAuthorizedApplications collection.
+ </para>
+ <para>All configuration changes take effect immediately.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwAuthorizedApplication.Name">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Specifies the friendly name of this application.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>This property Is required.</remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwAuthorizedApplication.ProcessImageFileName">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Specifies the process image file name for this application.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>
+ The image file name must be a fully qualified path And reference an existing application. The name may contain environment variables.
+ </para>
+ <para>This property Is required.</para>
+ <para>A demonstration of this property can be found in the VBScript code example Adding an Application.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwAuthorizedApplication.IpVersion">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Specifies the IP version setting for this application.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>Only NET_FW_IP_VERSION_ANY Is supported And this Is the default for New applications.</remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwAuthorizedApplication.Scope">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Controls the network scope from which the port can listen.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>When setting the Scope property, only <c>NET_FW_SCOPE_ALL</c> And <c>NET_FW_SCOPE_LOCAL_SUBNET</c> are valid.</para>
+ <para>The default value Is <c>NET_FW_SCOPE_ALL</c> for New ports.</para>
+ <para>To create a custom scope, use the RemoteAddresses property.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwAuthorizedApplication.RemoteAddresses">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Specifies a set of the remote addresses from which the application can listen for traffic.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>
+ The remoteAddrs parameter consists of one Or more comma-delimited tokens specifying the remote addresses from which the
+ application can listen for traffic. The default value Is "*".
+ </para>
+ <para>Valid tokens:</para>
+ <list type="bullet">
+ <item>
+ <term>"*": any remote address; If present, it must be the only token.</term>
+ </item>
+ <item>
+ <term>"LocalSubnet": Not case-sensitive; specifying more than once has no effect.</term>
+ </item>
+ <item>
+ <term>
+ subnet: may be specified Using either subnet mask Or network prefix notation. If neither a subnet mask nor a network prefix Is
+ specified, the subnet mask defaults to 255.255.255.255. Examples of valid subnets: 10.0.0.2/255.0.0.0 10.0.0.2/8 10.0.0.2
+ </term>
+ </item>
+ <item>
+ <term>Windows Vista: A valid IPv6 address.</term>
+ </item>
+ <item>
+ <term>Windows Vista: An IPv4 address range In the format "start address - end address."</term>
+ </item>
+ <item>
+ <term>Windows Vista: An IPv6 address range In the format "start address - end address."</term>
+ </item>
+ </list>
+ <para>For a predefined address range, use the Scope property.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwAuthorizedApplication.Enabled">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Indicates whether the settings for this application are currently enabled.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>
+ This property can be set to false ( <c>VARIANT_FALSE</c>) to allow application settings to be stored in the
+ INetFWAuthorizedApplications collection without actually authorizing the application.
+ </para>
+ <para>The default value Is true ( <c>VARIANT_TRUE</c>) for New applications.</para>
+ </remarks>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INetFwAuthorizedApplications">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered Or
+ unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>
+ The <c>INetFwAuthorizedApplications</c> interface provides access to a collection of applications authorized open ports in the firewall.
+ </para>
+ </summary>
+ <remarks>
+ <para>An instance of this interface Is retrieved through the AuthorizedApplications property of the INetFwProfile interface.</para>
+ <para>All configuration changes take effect immediately.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwAuthorizedApplications.Count">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Specifies the number of items in the collection.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+ <returns>None</returns>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwAuthorizedApplications.Add(Vanara.PInvoke.FirewallApi.INetFwAuthorizedApplication)">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>The <c>Add</c> method adds a New application to the collection.</para>
+ </summary>
+ <param name="app">TBD</param>
+ <remarks>If an application with the same path already exists, the existing settings are overwritten.</remarks>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwAuthorizedApplications.Remove(System.String)">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>The <c>Remove</c> method removes an application from the collection.</para>
+ </summary>
+ <param name="imageFileName">Application name to be removed.</param>
+ <remarks>
+ <para>The <c>imageFileName</c> parameter must be a fully qualified path And may contain environment variables.</para>
+ <para>If the application does Not exist in the collection, the Remove method has no effect.</para>
+ </remarks>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwAuthorizedApplications.Item(System.String)">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>The <c>Item</c> method returns the specified application if it Is in the collection.</para>
+ </summary>
+ <param name="imageFileName">Application to retrieve.</param>
+ <returns>TBD</returns>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwAuthorizedApplications.GetEnumerator">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Returns an object supporting <c>IEnumVARIANT</c> that can be used to iterate through all the applications in the collection.</para>
+ <para>
+ Iteration through a collection Is done using the <c>for each</c> construct in VBScript. See Iterating a Collection for an example.
+ </para>
+ <para>This property Is read-only.</para>
+ </summary>
+ <returns/>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INetFwIcmpSettings">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered Or
+ unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>The <c>INetFwIcmpSettings</c> interface provides access to the settings controlling ICMP packets.</para>
+ </summary>
+ <remarks>
+ <para>Instances of this interface are retrieved through the IcmpSettings property of the INetFwProfile interface.</para>
+ <para>
+ Because the methods And properties of this interface enable all rules belonging to a given ICMP type, enabling a rule may enable
+ rules from other groups as well.
+ </para>
+ <para>All configuration changes take effect immediately.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwIcmpSettings.AllowOutboundDestinationUnreachable">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Indicates whether this Is allowed.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>This setting Is common to IPv4 And IPv6.</remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwIcmpSettings.AllowRedirect">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Indicates whether redirect Is allowed.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>This setting Is common to IPv4 And IPv6.</remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwIcmpSettings.AllowInboundEchoRequest">
+ <summary>Gets Or sets a flag indicating whether to allow inbound echo requests.</summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwIcmpSettings.AllowOutboundTimeExceeded">
+ <summary>Gets Or sets a flag indicating whether to allow “outbound time exceeded” messages.</summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwIcmpSettings.AllowOutboundParameterProblem">
+ <summary>Gets Or sets a flag indicating whether to allow “outbound parameter problem” messages.</summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwIcmpSettings.AllowOutboundSourceQuench">
+ <summary>Gets Or sets a flag indicating whether to allow “outbound source quench” messages.</summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwIcmpSettings.AllowInboundRouterRequest">
+ <summary>Gets Or sets a flag indicating whether to allow inbound router requests.</summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwIcmpSettings.AllowInboundTimestampRequest">
+ <summary>Gets Or sets a flag indicating whether to allow inbound timestamp requests.</summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwIcmpSettings.AllowInboundMaskRequest">
+ <summary>Gets Or sets a flag indicating whether to allow inbound mask requests.</summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwIcmpSettings.AllowOutboundPacketTooBig">
+ <summary>Gets Or sets a flag indicating whether to allow “outbound packet too big” messages.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INetFwMgr">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered Or
+ unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>The INetFwMgr interface provides access to the firewall settings for a computer.</para>
+ </summary>
+ <remarks>
+ <para>
+ <c>Windows Vista:</c> Windows Vista users must use applications developed in Windows Vista for all methods And properties of this interface.
+ </para>
+ <para>This interface Is supported by the HNetCfg.FwMgr COM object.</para>
+ <para>All configuration changes take effect immediately.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwMgr.LocalPolicy">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Retrieves the local firewall policy.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwMgr.CurrentProfileType">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Retrieves the type of firewall profile currently in effect.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+ <remarks>The SharedAccess service must be running.</remarks>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwMgr.RestoreDefaults">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Restores the local configuration to its default, installed state.</para>
+ </summary>
+ <remarks>
+ This method deletes all user And application-added applications And ports that return the system to its installed state. This
+ includes restoring the defaults for Internet Connection Sharing.
+ </remarks>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwMgr.IsPortAllowed(System.String,Vanara.PInvoke.FirewallApi.NET_FW_IP_VERSION,System.Int32,System.String,Vanara.PInvoke.FirewallApi.NET_FW_IP_PROTOCOL,System.Boolean@,System.Boolean@)">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Determines whether an application can listen for inbound traffic on the specified port.</para>
+ </summary>
+ <param name="imageFileName">
+ The image file name of the process listening on the network. It must be a fully qualified path, but may contain environment
+ variables. If imageFileName Is <c>NULL</c>, the function determines whether the port Is allowed for all applications.
+ </param>
+ <param name="ipVersion">IP version of the traffic. If localAddress Is non- <c>NULL</c>, this must Not be <c>NET_FW_IP_VERSION_ANY</c>.</param>
+ <param name="portNumber">Local IP port number of the traffic.</param>
+ <param name="localAddress">
+ Either a dotted-decimal IPv4 address Or an IPv6 hex address specifying the local address of the traffic. Typically, this Is the
+ address passed to bind. If localAddress Is <c>NULL</c>, the function determines whether the port Is allowed for all interfaces.
+ </param>
+ <param name="ipProtocol">IP protocol of the traffic, either <c>NET_FW_IP_PROTOCOL_TCP</c> Or <c>NET_FW_IP_PROTOCOL_UDP</c>.</param>
+ <param name="allowed">
+ Indicates by a value of VARIANT_TRUE Or VARIANT_FALSE whether the port Is allowed for at least some local interfaces And remote addresses.
+ </param>
+ <param name="restricted">
+ Indicates by a value of VARIANT_TRUE Or VARIANT_FALSE whether some local interfaces Or remote addresses are blocked for this
+ port. For example, if the port Is restricted to the local subnet only.
+ </param>
+ <remarks>
+ <para>The INetFwPolicy2:IsRuleGroupEnabled method Is generally recommended In place Of this method.</para>
+ <para>The <c>IsPortAllowed</c> method checks whether traffic will be allowed with the current firewall configuration for:</para>
+ <list type="bullet">
+ <item>
+ <term>A specific application.</term>
+ </item>
+ <item>
+ <term>A specific port.</term>
+ </item>
+ <item>
+ <term>A specific application on a specific port.</term>
+ </item>
+ </list>
+ <para>
+ In its operation <c>IsPortAllowed</c> considers whether the firewall Is currently enabled Or disabled, whether the application
+ Is allowed in the current profile Exceptions List, whether the port Is allowed in the current profile Exceptions List, whether
+ the file And print sharing option has been enabled, And whether the remote administration option has been enabled.
+ </para>
+ <para>
+ Because of the many factors in determining whether a port Is allowed, the more specific information that Is given via this
+ method's input parameters, the more likely a clear result with meaningful restrictions will be returned.
+ </para>
+ </remarks>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwMgr.IsIcmpTypeAllowed(Vanara.PInvoke.FirewallApi.NET_FW_IP_VERSION,System.String,System.Byte,System.Boolean@,System.Boolean@)">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Determines whether the specified ICMP type Is allowed.</para>
+ </summary>
+ <param name="ipVersion">
+ <para>IP version of the traffic. This cannot be <c>NET_FW_IP_VERSION_ANY</c>.</para>
+ <para>IP version of the traffic. This cannot be <c>NET_FW_IP_VERSION_ANY</c>.</para>
+ </param>
+ <param name="localAddress">
+ <para>
+ Either a dotted-decimal IPv4 address Or an IPv6 hex address specifying the local address of the traffic. Typically, this Is the
+ address passed to bind. If localAddress Is <c>NULL</c>, the function determines whether the port Is allowed for all interfaces.
+ </para>
+ <para>
+ Either a dotted-decimal IPv4 address Or an IPv6 hex address specifying the local address of the traffic. Typically, this Is the
+ address passed to bind. If localAddress Is <c>NULL</c>, the function determines whether the port Is allowed for all interfaces.
+ </para>
+ </param>
+ <param name="type">
+ <para>ICMP type. For a list of possible ICMP types, see ICMP Type Numbers.</para>
+ <para>ICMP type.</para>
+ </param>
+ <param name="allowed">
+ <para>
+ Indicates by a value of VARIANT_TRUE Or VARIANT_FALSE whether the port Is allowed for at least some local interfaces And remote addresses.
+ </para>
+ <para>
+ Indicates by a value of VARIANT_TRUE Or VARIANT_FALSE whether the port Is allowed for at least some local interfaces And remote addresses.
+ </para>
+ </param>
+ <param name="restricted">
+ <para>
+ Indicates by a value of VARIANT_TRUE Or VARIANT_FALSE whether some local interfaces Or remote addresses are blocked for this
+ port. For example, if the port Is restricted to the local subnet only.
+ </para>
+ <para>
+ Indicates by a value of VARIANT_TRUE Or VARIANT_FALSE whether some local interfaces Or remote addresses are blocked for this
+ port. For example, if the port Is restricted to the local subnet only.
+ </para>
+ </param>
+ <remarks>The INetFwPolicy2:IsRuleGroupEnabled method Is generally recommended In place Of this method.</remarks>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INetFwOpenPort">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered Or
+ unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>The <c>INetFwOpenPort</c> interface provides access to the properties of a port that has been opened in the firewall.</para>
+ </summary>
+ <remarks>
+ <para>Ports with their <c>BuiltIn</c> property set to true ( <c>VARIANT_TRUE</c>) are system specified And cannot be removed.</para>
+ <para>When creating New ports, this interface Is supported by the <c>HNetCfg.FWOpenPort</c> COM object.</para>
+ <para>For reading Or modifying existing ports, instances of this interface are retrieved through the INetFwOpenPortscollection.</para>
+ <para>All configuration changes take effect immediately.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwOpenPort.Name">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Specifies the friendly name of this port.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>This property Is required.</remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwOpenPort.IpVersion">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Specifies the IP version setting for this port.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>Only <c>NET_FW_IP_VERSION_ANY</c> Is supported And this Is the default for New ports.</remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwOpenPort.Protocol">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Specifies the protocol type setting for this port.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>The default protocol type Is TCP for New ports.</remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwOpenPort.Port">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Specifiess the host-ordered port number for this port.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwOpenPort.Scope">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Controls the network scope from which the port can listen.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>When setting the Scope property, only <c>NET_FW_SCOPE_ALL</c> And <c>NET_FW_SCOPE_LOCAL_SUBNET</c> are valid.</para>
+ <para>The default value Is <c>NET_FW_SCOPE_ALL</c> for New ports.</para>
+ <para>To create a custom scope, use the RemoteAddresses property.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwOpenPort.RemoteAddresses">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Specifies a set of remote addresses from which the port can listen for traffic.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>
+ The remoteAddrs parameter consists of one Or more comma-delimited tokens specifying the remote addresses from which the
+ application can listen for traffic. The default value Is "*".
+ </para>
+ <para>Valid tokens:</para>
+ <list type="bullet">
+ <item>
+ <term>"*": any remote address; If present, it must be the only token.</term>
+ </item>
+ <item>
+ <term>"LocalSubnet": Not case-sensitive; specifying more than once has no effect.</term>
+ </item>
+ <item>
+ <term>
+ subnet: may be specified Using either subnet mask Or network prefix notation. If neither a subnet mask nor a network prefix Is
+ specified, the subnet mask defaults to 255.255.255.255. Examples of valid subnets: 10.0.0.2/255.0.0.0 10.0.0.2/8 10.0.0.2
+ </term>
+ </item>
+ <item>
+ <term>Windows Vista: A valid IPv6 address.</term>
+ </item>
+ <item>
+ <term>Windows Vista: An IPv4 address range In the format "start address - end address."</term>
+ </item>
+ <item>
+ <term>Windows Vista: An IPv6 address range In the format "start address - end address."</term>
+ </item>
+ </list>
+ <para>For a predefined address range, use the Scope property.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwOpenPort.Enabled">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Indicates whether the settings for this port are currently enabled.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>
+ This property can be set to false ( <c>VARIANT_FALSE</c>) to allow port settings to be stored in the INetFWOpenPorts collection
+ without actually opening the port.
+ </para>
+ <para>The default value Is true ( <c>VARIANT_TRUE</c>) for New ports.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwOpenPort.BuiltIn">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Indicates whether the port Is defined by the system.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+ <remarks>
+ Ports with their <c>BuiltIn</c> property set to true ( <c>VARIANT_TRUE</c>) are system specified And cannot be removed, only the
+ Enabled, RemoteAddress, And Scope properties can be modified.
+ </remarks>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INetFwOpenPorts">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered Or
+ unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>The <c>INetFwOpenPorts</c> interface Is a standard Automation collection interface.</para>
+ </summary>
+ <remarks>
+ <para>An instance of this interface Is retrieved through the GloballyOpenPorts property of the INetFwProfile interface.</para>
+ <para>All configuration changes take effect immediately.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwOpenPorts.Count">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Retrieves a read-only element yielding the number of items in the collection.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwOpenPorts.Add(Vanara.PInvoke.FirewallApi.INetFwOpenPort)">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Opens a New port And adds it to the collection.</para>
+ </summary>
+ <param name="port">Port to add to the collection.</param>
+ <remarks>If the port Is already open, the existing settings are overwritten.</remarks>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwOpenPorts.Remove(System.Int32,Vanara.PInvoke.FirewallApi.NET_FW_IP_PROTOCOL)">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Closes a port And removes it from the collection.</para>
+ </summary>
+ <param name="portNumber">Port number to remove.</param>
+ <param name="ipProtocol">Protocol of the port to remove.</param>
+ <remarks>If the port Is already closed ,the <c>Remove</c> method has no effect.</remarks>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwOpenPorts.Item(System.Int32,Vanara.PInvoke.FirewallApi.NET_FW_IP_PROTOCOL)">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Returns the specified port if it Is in the collection.</para>
+ </summary>
+ <param name="portNumber">Port number to find.</param>
+ <param name="ipProtocol">Protocol of the port to find by type NET_FW_IP_PROTOCOL.</param>
+ <returns>
+ <para>Reference to the returned INetFwOpenPort object.</para>
+ </returns>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwOpenPorts.GetEnumerator">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Returns an object supporting <c>IEnumVARIANT</c> that can be used to iterate through all the ports in the collection.</para>
+ <para>
+ Iteration through a collection Is done using the <c>for each</c> construct in VBScript. See Iterating a Collection for an example.
+ </para>
+ </summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INetFwPolicy">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered Or
+ unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>The <c>INetFwPolicy</c> interface provides access to a firewall policy.</para>
+ </summary>
+ <remarks>
+ <para>Instances of this interface are retrieved through the LocalPolicy property of the INetFwMgr interface.</para>
+ <para>All configuration changes take effect immediately.</para>
+ <para>The Windows Firewall/Internet Connection Sharing service must be running to access this interface.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwPolicy.CurrentProfile">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Retrieves the current firewall profile.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+ <value>The current firewall profile.</value>
+ <remarks>
+ <para>The SharedAccess service must be running.</para>
+ <para>To get specific profile objects, use INetFwPolicy:GetProfileByType instead Of <c>INetFwPolicy:CurrentProfile</c>.</para>
+ <para>
+ On Windows 7, the netsh context <c>current</c> maps to all currently active profiles for netsh advfirewall And netsh firewall.
+ On earlier versions of Windows, <c>current</c> maps to the most restrictive profile.
+ </para>
+ </remarks>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwPolicy.GetProfileByType(Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE)">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Retrieves the profile of the requested type.</para>
+ </summary>
+ <param name="profileType">Type of profile from NET_FW_PROFILE_TYPE.</param>
+ <returns>Retrieved profile of type INetFwProfile.</returns>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INetFwPolicy2">
+ <summary>The <c>INetFwPolicy2</c> interface allows an application Or service to access the firewall policy.</summary>
+ <remarks>
+ <para>All configuration changes take effect immediately.</para>
+ <para>The Windows Firewall/Internet Connection Sharing service must be running to access this interface.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwPolicy2.CurrentProfileTypes">
+ <summary>
+ <para>Retrieves the currently active firewall profile.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+ <remarks>Multiple profiles can be returned in the profiles bitmask.</remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwPolicy2.FirewallEnabled(Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE2)">
+ <summary>
+ <para>Indicates whether a firewall Is enabled locally (the effective result may differ due to group policy settings).</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <param name="profileType"/>
+ <remarks>
+ When you pass a profile type obtained from the CurrentProfileTypes property, make sure that you pass only one profile type to
+ <c>get_FirewallEnabled</c> And <c>put_FirewallEnabled</c>. Note that <c>get_CurrentProfileTypes</c> can return multiple profiles.
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwPolicy2.ExcludedInterfaces(Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE2)">
+ <summary>
+ <para>Specifies a list of interfaces on which firewall settings are excluded.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <param name="profileType"/>
+ <remarks>
+ <para>
+ An excluded interface Is an interface to which the firewall Is Not applicable. The firewall Is Not applicable to any traffic
+ received from Or sent to an excluded interface. An empty list indicates that there are no excluded interfaces.
+ </para>
+ <para>
+ When you pass a profile type obtained from the CurrentProfileTypes property, make sure that you pass only one profile type to
+ <c>get_ExcludedInterfaces</c> And <c>put_ExcludedInterfaces</c>. Note that <c>get_CurrentProfileTypes</c> can return multiple profiles.
+ </para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwPolicy2.BlockAllInboundTraffic(Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE2)">
+ <summary>
+ <para>Indicates whether the firewall should Not allow inbound traffic.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <param name="profileType"/>
+ <remarks>
+ <para>
+ All interfaces are firewall-enabled. This means that all the exceptions (such as GloballyOpenPorts, Applications, Or
+ Services) which are specified in the profile are ignored And only locally-initiated traffic Is allowed.
+ </para>
+ <para>
+ When you pass a profile type obtained from the CurrentProfileTypes property, make sure that you pass only one profile type to
+ <c>get_BlockAllInboundTraffic</c> And <c>put_BlockAllInboundTraffic</c>. Note that <c>get_CurrentProfileTypes</c> can return
+ multiple profiles.
+ </para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwPolicy2.NotificationsDisabled(Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE2)">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Indicates whether interactive firewall notifications are disabled.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwPolicy2.UnicastResponsesToMulticastBroadcastDisabled(Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE2)">
+ <summary>
+ <para>Indicates whether the firewall should Not allow unicast responses to multicast And broadcast traffic.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <param name="profileType"/>
+ <remarks>
+ <para>
+ If a computer sends a broadcast packet, a unicast response Is allowed for three seconds. Use this property to change this behavior.
+ </para>
+ <para>
+ When you pass a profile type obtained from the CurrentProfileTypes property ( <c>get_CurrentProfileTypes</c>), make sure that
+ you pass only one profile type to <c>get_UnicastResponsesToMulticastBroadcastDisabled</c> And
+ <c>put_UnicastResponsesToMulticastBroadcastDisabled</c>. Note that <c>get_CurrentProfileTypes</c> can return multiple profiles.
+ </para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwPolicy2.Rules">
+ <summary>
+ <para>Retrieves the collection of firewall rules.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwPolicy2.ServiceRestriction">
+ <summary>
+ <para>Retrieves the interface used to access the Windows Service Hardening store.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwPolicy2.EnableRuleGroup(Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE2,System.String,System.Boolean)">
+ <summary>The <c>EnableRuleGroup</c> method enables Or disables a specified group of firewall rules.</summary>
+ <param name="profileTypesBitmask">A bitmask of profiles from NET_FW_PROFILE_TYPE2.</param>
+ <param name="group">
+ A string that was used to group rules together. It can be the group name Or an indirect string to the group name in the form of
+ "@C:\Program Files\Contoso Storefront\StorefrontRes.dll,-1234". Rules belonging to this group would be enabled Or disabled.
+ </param>
+ <param name="enable">
+ <para>Indicates whether the group of rules identified by the group parameter are to be enabled Or disabled.</para>
+ <para>If this value Is set to true ( <c>VARIANT_TRUE</c>), the group of rules will be enabled; otherwise the group Is disabled.</para>
+ </param>
+ <remarks>
+ When indirect strings in the form of "@C:\Program Files\Contoso Storefront\StorefrontRes.dll,-1234" are passed as parameters to
+ the Windows Firewall with Advanced Security APIs, they should be specified by a full path. The file should have a secure access
+ that permits the Local Service account read access to allow the Windows Firewall Service to read the strings. To avoid
+ non-privileged security principals from modifying the strings, the DLLs should only allow write access to the Administrator account.
+ </remarks>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwPolicy2.IsRuleGroupEnabled(Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE2,System.String)">
+ <summary>The <c>IsRuleGroupEnabled</c> method determines whether a specified group of firewall rules are enabled Or disabled.</summary>
+ <param name="profileTypesBitmask">A bitmask of profiles from NET_FW_PROFILE_TYPE2.</param>
+ <param name="group">
+ A string that was used to group rules together. It can be the group name Or an indirect string to the group name in the form of
+ "@yourresourcedll.dll,-23255". Rules belonging to this group would be queried.
+ </param>
+ <returns>
+ This call returns a boolean enable status which indicates whether the group of rules identified by the group parameter are
+ enabled Or disabled. If this value Is set to true (VARIANT_TRUE), the group of rules Is enabled; otherwise, the group Is disabled.
+ </returns>
+ <remarks>
+ When indirect strings in the form of "@yourresourcedll.dll,-23255" are passed as parameters to the Windows Firewall with
+ Advanced Security APIs, they should either be placed under the System32 Windows directory Or specified by a full path. Further
+ the file should have a secure access that permits the Local Service account read access to allow the Windows Firewall Service to
+ read the strings. To avoid non-privileged security principals from modifying the strings, the DLLs should only allow write
+ access to the Administrator account.
+ </remarks>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwPolicy2.RestoreLocalFirewallDefaults">
+ <summary>The <c>RestoreLocalFirewallDefaults</c> method restores the local firewall configuration to its default state.</summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwPolicy2.DefaultInboundAction(Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE2)">
+ <summary>
+ <para>Specifies the default action for inbound traffic. These settings are Block by default.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>
+ All interfaces are firewall-enabled. This means that all the exceptions (such as GloballyOpenPorts, Applications, Or
+ Services) which are specified in the profile, are ignored And only locally-initiated traffic Is allowed.
+ </para>
+ <para>
+ When you pass a profile type obtained from the CurrentProfileTypes property, make sure that you pass only one profile type to
+ <c>get_DefaultInboundAction</c> And <c>put_DefaultInboundAction</c>. Note that <c>get_CurrentProfileTypes</c> can return
+ multiple profiles.
+ </para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwPolicy2.DefaultOutboundAction(Vanara.PInvoke.FirewallApi.NET_FW_PROFILE_TYPE2)">
+ <summary>
+ <para>Specifies the default action for outbound traffic. These settings are Allow by default.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>
+ All interfaces are firewall-enabled. This means that all the exceptions (such as GloballyOpenPorts, Applications, Or
+ Services) which are specified in the profile are ignored And only locally-initiated traffic Is allowed.
+ </para>
+ <para>
+ When you pass a profile type obtained from the CurrentProfileTypes property, make sure that you pass only one profile type to
+ <c>get_DefaultOutboundAction</c> And <c>put_DefaultOutboundAction</c>. Note that <c>get_CurrentProfileTypes</c> can return
+ multiple profiles.
+ </para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwPolicy2.IsRuleGroupCurrentlyEnabled(System.String)">
+ <summary>
+ The <c>get_IsRuleGroupCurrentlyEnabled</c> method determines whether a specified group of firewall rules are enabled Or disabled
+ for the current profile.
+ </summary>
+ <param name="group">
+ A string that was used to group rules together. It can be the group name Or an indirect string to the group name in the form of
+ "@C:\Program Files\Contoso Storefront\StorefrontRes.dll,-1234". Rules belonging to this group would be queried.
+ </param>
+ <returns>
+ <para>
+ This call returns a boolean enable status which indicates whether the group of rules identified by the group parameter are
+ enabled Or disabled. If this value Is set to true ( <c>VARIANT_TRUE</c>), the group of rules Is enabled; otherwise, the group Is disabled.
+ </para>
+ </returns>
+ <remarks>
+ When indirect strings in the form of "@C:\Program Files\Contoso Storefront\StorefrontRes.dll,-1234" are passed as parameters to
+ the Windows Firewall with Advanced Security APIs, they should be specified by a full path. The file should have a secure access
+ that permits the Local Service account read access to allow the Windows Firewall Service to read the strings. To avoid
+ non-privileged security principals from modifying the strings, the DLLs should only allow write access to the Administrator account.
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwPolicy2.LocalPolicyModifyState">
+ <summary>
+ <para>
+ The LocalPolicyModifyState attribute determines if adding Or setting a rule Or group of rules will take effect in the current
+ firewall profile.
+ </para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INetFwProduct">
+ <summary>
+ The <c>INetFwProduct</c> interface allows an application Or service to access the properties of a third-party firewall registration.
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwProduct.RuleCategories">
+ <summary>
+ <para>
+ For a third-party firewall product registration, indicates the rule categories for which the third-party firewall wishes to take
+ ownership from Windows Firewall.
+ </para>
+ <para>This property Is read/write.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwProduct.DisplayName">
+ <summary>
+ <para>Indicates the display name for a third-party firewall product registration.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwProduct.PathToSignedProductExe">
+ <summary>
+ <para>Indicates the path to the signed executable file of a third-party firewall product registration.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+ <remarks>This Is a read-only property, which Is set after the product has been registered.</remarks>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INetFwProducts">
+ <summary>
+ The <c>INetFwProducts</c> interface allows an application Or service to access the methods And properties for registering
+ third-party firewall products with Windows Firewall And for enumerating registered products.
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwProducts.Count">
+ <summary>
+ <para>Indicates the number of registered third-party firewall products.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwProducts.Register(Vanara.PInvoke.FirewallApi.INetFwProduct)">
+ <summary>The <c>Register</c> method registers a third-party firewall product.</summary>
+ <param name="product">The INetFwProduct object that defines the product to be registered.</param>
+ <returns>The registration handle. The registration will be removed when this object Is released.</returns>
+ <remarks>
+ <para>
+ Registrations only last for the lifetime of the Windows Firewall service. Third-party firewalls calling this API should also
+ have a service dependency on the Windows Firewall service (mpssvc) to make sure that the service Is Not unexpectedly stopped,
+ causing all registrations to be lost.
+ </para>
+ <para>
+ Registrations are removed when a returned registration object Is released by the third-party firewall Or when the third-party
+ firewall process exits.
+ </para>
+ <para>
+ A user mode code module using this API should be linked with the /integritycheck linker flag. This flag sets
+ IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY in the image PE header OptionalHeader.DllCharacteristics field, which enforces a
+ signature check at load time. The code module should be digitally signed, consistent with the Authenticode signing procedure.
+ </para>
+ </remarks>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwProducts.Item(System.Int32)">
+ <summary>The <c>Item</c> method returns the product with the specified index if it Is in the collection.</summary>
+ <param name="index">Index of the product to retrieve.</param>
+ <returns>Reference to the returned INetFwProduct object.</returns>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwProducts.GetEnumerator">
+ <summary>
+ <para>
+ Returns an object supporting <c>IEnumVARIANT</c> that can be used to iterate through all the registered third-party firewall
+ products in the collection.
+ </para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INetFwProfile">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered Or
+ unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>The <c>INetFwProfile</c> interface provides access to the firewall settings profile.</para>
+ </summary>
+ <remarks>
+ <para>
+ Instances of this interface are retrieved through the CurrentProfile property Or GetProfileByType method of the INetFwPolicy interface.
+ </para>
+ <para>All configuration changes take effect immediately.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwProfile.Type">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Speciifes the type of the profile.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwProfile.FirewallEnabled">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Indicates whether the firewall Is enabled.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ The resulting firewall status Is based on the local policy from the local store. Use the procedure Checking the Effective
+ Firewall Status to determine the overall operational state.
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwProfile.ExceptionsNotAllowed">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Indicates whether the firewall should Not allow exceptions.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>
+ All interfaces are firewalled. This means that all the exceptions; such as GloballyOpenPorts, Applications, Or Services, which
+ are specified in the profile, are ignored And only locally initiated traffic Is allowed.
+ </para>
+ <para>
+ The resulting firewall status Is determined by the combination of two levels: First check the Global operation mode, Then the
+ mode on the interface of interest. Use the procedure Checking the Effective Firewall Status to determine the overall operational state.
+ </para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwProfile.NotificationsDisabled">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Indicates whether interactive firewall notifications are disabled.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwProfile.UnicastResponsesToMulticastBroadcastDisabled">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Indicates whether the firewall should Not allow unicast responses to multicast And broadcast traffic.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ If a PC sends a broadcast packet, a unicast response Is allowed for three seconds. Use this property to change this behavior.
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwProfile.RemoteAdminSettings">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Specifies the settings governing remote administration.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwProfile.IcmpSettings">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Retrieves the ICMP settings of the profile.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwProfile.GloballyOpenPorts">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Retrieves the collection of globally open ports of the profile.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwProfile.Services">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Retrieves the collection of services of the profile.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwProfile.AuthorizedApplications">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Retrieves the collection of authorized applications of the profile.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INetFwRemoteAdminSettings">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered Or
+ unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>The <c>INetFwRemoteAdminSettings</c> interface provides access to the settings that control remote administration.</para>
+ </summary>
+ <remarks>
+ <para>An instance of this interface Is retrieved through the RemoteAdminSettingsproperty of the INetFwProfile interface.</para>
+ <para>All configuration changes take effect immediately.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRemoteAdminSettings.IpVersion">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Specifies the IP version.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This Is the IP version for which remote admin Is authorized.</para>
+ <para>Only <c>NET_FW_IP_VERSION_ANY</c> Is supported.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRemoteAdminSettings.Scope">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Controls the network scope from which remote administration Is allowed.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>When setting the <c>Scope</c> property, only <c>NET_FW_SCOPE_ALL</c> And <c>NET_FW_SCOPE_LOCAL_SUBNET</c> are valid.</para>
+ <para>The default value Is <c>NET_FW_SCOPE_ALL</c> for New ports.</para>
+ <para>To create a custom scope, use the RemoteAddresses property of this interface.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRemoteAdminSettings.RemoteAddresses">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Specifies a set of remote addresses from which remote administration Is allowed.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>
+ The remoteAddrs parameter consists of one Or more comma-delimited tokens specifying the remote addresses from which the
+ application can listen for traffic. The default value Is "*".
+ </para>
+ <para>Valid tokens:</para>
+ <list type="bullet">
+ <item>
+ <term>"*": any remote address; If present, it must be the only token.</term>
+ </item>
+ <item>
+ <term>"LocalSubnet": Not case-sensitive; specifying more than once has no effect.</term>
+ </item>
+ <item>
+ <term>
+ subnet: may be specified Using either subnet mask Or network prefix notation. If neither a subnet mask nor a network prefix Is
+ specified, the subnet mask defaults to 255.255.255.255. Examples of valid subnets: 10.0.0.2/255.0.0.0 10.0.0.2/8 10.0.0.2
+ </term>
+ </item>
+ <item>
+ <term>Windows Vista: A valid IPv6 address.</term>
+ </item>
+ <item>
+ <term>Windows Vista: An IPv4 address range In the format "start address - end address."</term>
+ </item>
+ <item>
+ <term>Windows Vista: An IPv6 address range In the format "start address - end address."</term>
+ </item>
+ </list>
+ <para>For a predefined address range, use the Scope property.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRemoteAdminSettings.Enabled">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Indicates whether remote administration Is enabled..</para>
+ <para>This property Is read/write.</para>
+ </summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INetFwRule">
+ <summary>The <c>INetFwRule</c> interface provides access to the properties of a rule.</summary>
+ <remarks>
+ <para>
+ Each time you change a property of a rule, Windows Firewall commits the rule And verifies it for correctness. As a result, when you
+ edit a rule, you must perform the steps in a specific order. For example, if you add an ICMP rule, you must first set the protocol
+ to ICMP, then add the rule. If these steps are taken in the opposite order, an error occurs And the change Is lost.
+ </para>
+ <para>
+ If you are editing a TCP port rule And converting it into an ICMP rule, first delete the port, change protocol from TCP to ICMP, And
+ then add the rule.
+ </para>
+ <para>
+ In order to retrieve And modify existing rules, instances of this interface must be retrieved through INetFwRules. All configuration
+ changes take place immediately.
+ </para>
+ <para>When accessing the properties of a rule, keep in mind that there may be a small time lag before a newly-added rule Is applied.</para>
+ <para>
+ Properties are used to create firewall rules. Many of the properties can be used in order to create very specific firewall rules.
+ </para>
+ <list type="table">
+ <listheader>
+ <term>Property</term>
+ <term>Type And format</term>
+ <term>Constraints</term>
+ </listheader>
+ <item>
+ <term>Name</term>
+ <term>Clear text string.</term>
+ <term>Required. The string must Not contain a "|" And it must Not be "all".</term>
+ </item>
+ <item>
+ <term>Description</term>
+ <term>Clear text string.</term>
+ <term>Optional. The string must Not contain a "|".</term>
+ </item>
+ <item>
+ <term>Grouping</term>
+ <term>String in the format "@&lt;dll name&gt;, &lt;resource string identifier&gt;".</term>
+ <term>Required.</term>
+ </item>
+ <item>
+ <term>Enabled</term>
+ <term>Boolean (VARIANT_BOOLEAN).</term>
+ <term>Optional. Defaults to false (VARIANT_FALSE) if nothing Is specified.</term>
+ </item>
+ <item>
+ <term>ApplicationName</term>
+ <term>Clear text string.</term>
+ <term>Optional.</term>
+ </item>
+ <item>
+ <term>ServiceName</term>
+ <term>Clear text string.</term>
+ <term>Optional.</term>
+ </item>
+ <item>
+ <term>LocalPorts</term>
+ <term>Clear text string containing a list of port numbers. "RPC" Is an acceptable value.</term>
+ <term>Optional.</term>
+ </item>
+ <item>
+ <term>RemotePorts</term>
+ <term>Clear text string containing a list of port numbers.</term>
+ <term>Optional.</term>
+ </item>
+ <item>
+ <term>LocalAddresses</term>
+ <term>
+ Clear text string containing a list of IPv4 And IPv6 addresses separated by commas. Range values And"*"are acceptable in this list.
+ </term>
+ <term>Optional.</term>
+ </item>
+ <item>
+ <term>RemoteAddresses</term>
+ <term>
+ Clear text string containing a list of IPv4 And IPv6 addresses separated by commas. Range values And"*"are acceptable in this list.
+ </term>
+ <term>Optional.</term>
+ </item>
+ <item>
+ <term>Protocol</term>
+ <term>Number.</term>
+ <term>Optional.</term>
+ </item>
+ <item>
+ <term>put_Profiles</term>
+ <term>
+ String value in the format "type, code". Multiple types And codes can be included in the string by separating each pair with a ";".
+ </term>
+ <term>Optional.</term>
+ </item>
+ <item>
+ <term>Interfaces</term>
+ <term>Array of strings containing the friendly names of interfaces.</term>
+ <term>Optional.</term>
+ </item>
+ <item>
+ <term>InterfaceTypes</term>
+ <term>
+ String value. Multiple interface types can be included in the string by separating each value with a ",". Acceptable values are
+ "RemoteAccess", "Wireless", "Lan", And "All".
+ </term>
+ <term>Optional.</term>
+ </item>
+ <item>
+ <term>Direction</term>
+ <term>Enumeration.</term>
+ <term>Optional.</term>
+ </item>
+ <item>
+ <term>Action</term>
+ <term>Enumeration.</term>
+ <term>Optional.</term>
+ </item>
+ <item>
+ <term>EdgeTraversal</term>
+ <term>Boolean (VARIANT_BOOLEAN).</term>
+ <term>Optional.</term>
+ </item>
+ <item>
+ <term>Profiles</term>
+ <term>Enumeration.</term>
+ <term>Optional.</term>
+ </item>
+ </list>
+ <para>For additional information on each property, please see the corresponding topic.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule.Name">
+ <summary>
+ <para>Specifies the friendly name of this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is required. The string must Not contain the "|" character.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule.Description">
+ <summary>
+ <para>Specifies the description of this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional. The string must Not contain the "|" character.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule.ApplicationName">
+ <summary>
+ <para>Specifies the friendly name of the application to which this rule applies.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule.serviceName">
+ <summary>
+ <para>Specifies the service name property of the application.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>
+ This property Is optional. A serviceName value of "*" indicates that a service, Not an application, must be sending Or receiving traffic.
+ </para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule.Protocol">
+ <summary>
+ <para>Specifies the IP protocol of this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>The <c>Protocol</c> property must be set before the LocalPorts Or RemotePorts properties Or an error will be returned.</para>
+ <para>A list of protocol numbers Is available at the IANA website.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule.LocalPorts">
+ <summary>
+ <para>Specifies the list of local ports for this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>The Protocol property must be set before the <c>LocalPorts</c> property Or an error will be returned.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule.RemotePorts">
+ <summary>
+ <para>Specifies the list of remote ports for this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>The Protocol property must be set before the <c>RemotePorts</c> property Or an error will be returned.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule.LocalAddresses">
+ <summary>
+ <para>Specifies the list of local addresses for this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>
+ The localAddrs parameter consists of one Or more comma-delimited tokens specifying the local addresses from which the
+ application can listen for traffic. "*" Is the default value. Valid tokens include:
+ </para>
+ <list type="bullet">
+ <item>
+ <term>"*" indicates any local address. If present, this must be the only token included.</term>
+ </item>
+ <item>
+ <term>"Defaultgateway"</term>
+ </item>
+ <item>
+ <term>"DHCP"</term>
+ </item>
+ <item>
+ <term>"WINS"</term>
+ </item>
+ <item>
+ <term>"LocalSubnet" indicates any local address on the local subnet. This token Is Not case-sensitive.</term>
+ </item>
+ <item>
+ <term>
+ A subnet can be specified using either the subnet mask Or network prefix notation. If neither a subnet mask Not a network prefix
+ Is specified, the subnet mask defaults to 255.255.255.255.
+ </term>
+ </item>
+ <item>
+ <term>A valid IPv6 address.</term>
+ </item>
+ <item>
+ <term>An IPv4 address range in the format of "start address - end address" with no spaces included.</term>
+ </item>
+ <item>
+ <term>An IPv6 address range in the format of "start address - end address" with no spaces included.</term>
+ </item>
+ </list>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule.RemoteAddresses">
+ <summary>
+ <para>Specifies the list of remote addresses for this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>
+ The remoteAddrs parameter consists of one Or more comma-delimited tokens specifying the remote addresses from which the
+ application can listen for traffic. The default value Is "*". Valid tokens include:
+ </para>
+ <list type="bullet">
+ <item>
+ <term>"*" indicates any remote address. If present, this must be the only token included.</term>
+ </item>
+ <item>
+ <term>"Defaultgateway"</term>
+ </item>
+ <item>
+ <term>"DHCP"</term>
+ </item>
+ <item>
+ <term>"DNS"</term>
+ </item>
+ <item>
+ <term>"WINS"</term>
+ </item>
+ <item>
+ <term>"LocalSubnet" indicates any local address on the local subnet. This token Is Not case-sensitive.</term>
+ </item>
+ <item>
+ <term>
+ A subnet can be specified using either the subnet mask Or network prefix notation. If neither a subnet mask Not a network prefix
+ Is specified, the subnet mask defaults to 255.255.255.255.
+ </term>
+ </item>
+ <item>
+ <term>A valid IPv6 address.</term>
+ </item>
+ <item>
+ <term>An IPv4 address range in the format of "start address - end address" with no spaces included.</term>
+ </item>
+ <item>
+ <term>An IPv6 address range in the format of "start address - end address" with no spaces included.</term>
+ </item>
+ </list>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule.IcmpTypesAndCodes">
+ <summary>
+ <para>Specifies the list of ICMP types And codes for this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>
+ The icmpTypesAndCodes parameter Is a list of ICMP types And codes separated by semicolon. "*" indicates all ICMP types And codes.
+ </para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule.Direction">
+ <summary>
+ <para>Specifies the direction of traffic for which the rule applies.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional. If this property Is Not specified, the default value Is <c>in</c>.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule.Interfaces">
+ <summary>
+ <para>Specifies the list of interfaces for which the rule applies.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional. The interfaces in the list are represented by their friendly name.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule.InterfaceTypes">
+ <summary>
+ <para>Specifies the list of interface types for which the rule applies.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>
+ Acceptable values for this property are "RemoteAccess", "Wireless", "Lan", And "All". If more than one interface type Is
+ specified, the strings must be separated by a comma.
+ </para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule.Enabled">
+ <summary>
+ <para>Enables Or disables a rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional. A New rule Is disabled by default.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule.Grouping">
+ <summary>
+ <para>Specifies the group to which an individual rule belongs.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>
+ Using the Grouping property Is highly recommended, as it groups multiple rules into a single line in the Windows Firewall
+ control panel. This allows the user to enable Or disable multiple rules with a single click. The Grouping property can also be
+ specified using indirect strings. In this case, a group description can also be specified that will appear in the rule group
+ properties in the Windows Firewall control panel. For example, if the group string Is specified by an indirect string at index
+ 1005 ("@yourresources.dll,-1005"), the group description can be specified at a resource string higher by 10000 "@youresources.dll,-11005."
+ </para>
+ <para>
+ When indirect strings in the form of "h" are passed as parameters to the Windows Firewall with Advanced Security APIs, they
+ should either be placed under the System32 Windows directory Or specified by a full path. Further, the file should have a secure
+ access that permits the Local Service account read access to allow the Windows Firewall Service to read the strings. To avoid
+ non-privileged security principals from modifying the strings, the DLLs should only allow write access to the Administrator account.
+ </para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule.Profiles">
+ <summary>
+ <para>Specifies the profiles to which the rule belongs.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule.EdgeTraversal">
+ <summary>
+ <para>Indicates whether edge traversal Is enabled Or disabled for this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>
+ The EdgeTraversal property indicates that specific inbound traffic Is allowed to tunnel through NATs And other edge devices
+ using the Teredo tunneling technology. In order for this setting to work correctly, the application Or service with the inbound
+ firewall rule needs to support IPv6. The primary application of this setting allows listeners on the host to be globally
+ addressable through a Teredo IPv6 address.
+ </para>
+ <para>New rules have the EdgeTraversal property disabled by default.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule.Action">
+ <summary>
+ <para>Specifies the action for a rule Or default setting.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INetFwRule2">
+ <summary>
+ The <c>INetFwRule2</c> interface allows an application Or service to access all the properties of INetFwRule as well as the four
+ edge properties of a firewall rule specified by NET_FW_EDGE_TRAVERSAL_TYPE.
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule2.Name">
+ <summary>
+ <para>Specifies the friendly name of this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is required. The string must Not contain the "|" character.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule2.Description">
+ <summary>
+ <para>Specifies the description of this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional. The string must Not contain the "|" character.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule2.ApplicationName">
+ <summary>
+ <para>Specifies the friendly name of the application to which this rule applies.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule2.serviceName">
+ <summary>
+ <para>Specifies the service name property of the application.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>
+ This property Is optional. A serviceName value of "*" indicates that a service, Not an application, must be sending Or receiving traffic.
+ </para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule2.Protocol">
+ <summary>
+ <para>Specifies the IP protocol of this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>The <c>Protocol</c> property must be set before the LocalPorts Or RemotePorts properties Or an error will be returned.</para>
+ <para>A list of protocol numbers Is available at the IANA website.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule2.LocalPorts">
+ <summary>
+ <para>Specifies the list of local ports for this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>The Protocol property must be set before the <c>LocalPorts</c> property Or an error will be returned.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule2.RemotePorts">
+ <summary>
+ <para>Specifies the list of remote ports for this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>The Protocol property must be set before the <c>RemotePorts</c> property Or an error will be returned.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule2.LocalAddresses">
+ <summary>
+ <para>Specifies the list of local addresses for this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>
+ The localAddrs parameter consists of one Or more comma-delimited tokens specifying the local addresses from which the
+ application can listen for traffic. "*" Is the default value. Valid tokens include:
+ </para>
+ <list type="bullet">
+ <item>
+ <term>"*" indicates any local address. If present, this must be the only token included.</term>
+ </item>
+ <item>
+ <term>"Defaultgateway"</term>
+ </item>
+ <item>
+ <term>"DHCP"</term>
+ </item>
+ <item>
+ <term>"WINS"</term>
+ </item>
+ <item>
+ <term>"LocalSubnet" indicates any local address on the local subnet. This token Is Not case-sensitive.</term>
+ </item>
+ <item>
+ <term>
+ A subnet can be specified using either the subnet mask Or network prefix notation. If neither a subnet mask Not a network prefix
+ Is specified, the subnet mask defaults to 255.255.255.255.
+ </term>
+ </item>
+ <item>
+ <term>A valid IPv6 address.</term>
+ </item>
+ <item>
+ <term>An IPv4 address range in the format of "start address - end address" with no spaces included.</term>
+ </item>
+ <item>
+ <term>An IPv6 address range in the format of "start address - end address" with no spaces included.</term>
+ </item>
+ </list>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule2.RemoteAddresses">
+ <summary>
+ <para>Specifies the list of remote addresses for this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>
+ The remoteAddrs parameter consists of one Or more comma-delimited tokens specifying the remote addresses from which the
+ application can listen for traffic. The default value Is "*". Valid tokens include:
+ </para>
+ <list type="bullet">
+ <item>
+ <term>"*" indicates any remote address. If present, this must be the only token included.</term>
+ </item>
+ <item>
+ <term>"Defaultgateway"</term>
+ </item>
+ <item>
+ <term>"DHCP"</term>
+ </item>
+ <item>
+ <term>"DNS"</term>
+ </item>
+ <item>
+ <term>"WINS"</term>
+ </item>
+ <item>
+ <term>"LocalSubnet" indicates any local address on the local subnet. This token Is Not case-sensitive.</term>
+ </item>
+ <item>
+ <term>
+ A subnet can be specified using either the subnet mask Or network prefix notation. If neither a subnet mask Not a network prefix
+ Is specified, the subnet mask defaults to 255.255.255.255.
+ </term>
+ </item>
+ <item>
+ <term>A valid IPv6 address.</term>
+ </item>
+ <item>
+ <term>An IPv4 address range in the format of "start address - end address" with no spaces included.</term>
+ </item>
+ <item>
+ <term>An IPv6 address range in the format of "start address - end address" with no spaces included.</term>
+ </item>
+ </list>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule2.IcmpTypesAndCodes">
+ <summary>
+ <para>Specifies the list of ICMP types And codes for this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>
+ The icmpTypesAndCodes parameter Is a list of ICMP types And codes separated by semicolon. "*" indicates all ICMP types And codes.
+ </para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule2.Direction">
+ <summary>
+ <para>Specifies the direction of traffic for which the rule applies.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional. If this property Is Not specified, the default value Is <c>in</c>.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule2.Interfaces">
+ <summary>
+ <para>Specifies the list of interfaces for which the rule applies.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional. The interfaces in the list are represented by their friendly name.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule2.InterfaceTypes">
+ <summary>
+ <para>Specifies the list of interface types for which the rule applies.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>
+ Acceptable values for this property are "RemoteAccess", "Wireless", "Lan", And "All". If more than one interface type Is
+ specified, the strings must be separated by a comma.
+ </para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule2.Enabled">
+ <summary>
+ <para>Enables Or disables a rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional. A New rule Is disabled by default.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule2.Grouping">
+ <summary>
+ <para>Specifies the group to which an individual rule belongs.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>
+ Using the Grouping property Is highly recommended, as it groups multiple rules into a single line in the Windows Firewall
+ control panel. This allows the user to enable Or disable multiple rules with a single click. The Grouping property can also be
+ specified using indirect strings. In this case, a group description can also be specified that will appear in the rule group
+ properties in the Windows Firewall control panel. For example, if the group string Is specified by an indirect string at index
+ 1005 ("@yourresources.dll,-1005"), the group description can be specified at a resource string higher by 10000 "@youresources.dll,-11005."
+ </para>
+ <para>
+ When indirect strings in the form of "h" are passed as parameters to the Windows Firewall with Advanced Security APIs, they
+ should either be placed under the System32 Windows directory Or specified by a full path. Further, the file should have a secure
+ access that permits the Local Service account read access to allow the Windows Firewall Service to read the strings. To avoid
+ non-privileged security principals from modifying the strings, the DLLs should only allow write access to the Administrator account.
+ </para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule2.Profiles">
+ <summary>
+ <para>Specifies the profiles to which the rule belongs.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule2.EdgeTraversal">
+ <summary>
+ <para>Indicates whether edge traversal Is enabled Or disabled for this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>
+ The EdgeTraversal property indicates that specific inbound traffic Is allowed to tunnel through NATs And other edge devices
+ using the Teredo tunneling technology. In order for this setting to work correctly, the application Or service with the inbound
+ firewall rule needs to support IPv6. The primary application of this setting allows listeners on the host to be globally
+ addressable through a Teredo IPv6 address.
+ </para>
+ <para>New rules have the EdgeTraversal property disabled by default.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule2.Action">
+ <summary>
+ <para>Specifies the action for a rule Or default setting.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule2.EdgeTraversalOptions">
+ <summary>
+ <para>This property can be used to access the edge properties of a firewall rule defined by NET_FW_EDGE_TRAVERSAL_TYPE.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INetFwRule3">
+ <summary>
+ The <c>INetFwRule3</c> interface allows an application Or service to access all the properties of INetFwRule2 And to provide access
+ to the requirements of app containers.
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.Name">
+ <summary>
+ <para>Specifies the friendly name of this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is required. The string must Not contain the "|" character.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.Description">
+ <summary>
+ <para>Specifies the description of this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional. The string must Not contain the "|" character.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.ApplicationName">
+ <summary>
+ <para>Specifies the friendly name of the application to which this rule applies.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.serviceName">
+ <summary>
+ <para>Specifies the service name property of the application.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>
+ This property Is optional. A serviceName value of "*" indicates that a service, Not an application, must be sending Or receiving traffic.
+ </para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.Protocol">
+ <summary>
+ <para>Specifies the IP protocol of this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>The <c>Protocol</c> property must be set before the LocalPorts Or RemotePorts properties Or an error will be returned.</para>
+ <para>A list of protocol numbers Is available at the IANA website.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.LocalPorts">
+ <summary>
+ <para>Specifies the list of local ports for this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>The Protocol property must be set before the <c>LocalPorts</c> property Or an error will be returned.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.RemotePorts">
+ <summary>
+ <para>Specifies the list of remote ports for this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>The Protocol property must be set before the <c>RemotePorts</c> property Or an error will be returned.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.LocalAddresses">
+ <summary>
+ <para>Specifies the list of local addresses for this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>
+ The localAddrs parameter consists of one Or more comma-delimited tokens specifying the local addresses from which the
+ application can listen for traffic. "*" Is the default value. Valid tokens include:
+ </para>
+ <list type="bullet">
+ <item>
+ <term>"*" indicates any local address. If present, this must be the only token included.</term>
+ </item>
+ <item>
+ <term>"Defaultgateway"</term>
+ </item>
+ <item>
+ <term>"DHCP"</term>
+ </item>
+ <item>
+ <term>"WINS"</term>
+ </item>
+ <item>
+ <term>"LocalSubnet" indicates any local address on the local subnet. This token Is Not case-sensitive.</term>
+ </item>
+ <item>
+ <term>
+ A subnet can be specified using either the subnet mask Or network prefix notation. If neither a subnet mask Not a network prefix
+ Is specified, the subnet mask defaults to 255.255.255.255.
+ </term>
+ </item>
+ <item>
+ <term>A valid IPv6 address.</term>
+ </item>
+ <item>
+ <term>An IPv4 address range in the format of "start address - end address" with no spaces included.</term>
+ </item>
+ <item>
+ <term>An IPv6 address range in the format of "start address - end address" with no spaces included.</term>
+ </item>
+ </list>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.RemoteAddresses">
+ <summary>
+ <para>Specifies the list of remote addresses for this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>
+ The remoteAddrs parameter consists of one Or more comma-delimited tokens specifying the remote addresses from which the
+ application can listen for traffic. The default value Is "*". Valid tokens include:
+ </para>
+ <list type="bullet">
+ <item>
+ <term>"*" indicates any remote address. If present, this must be the only token included.</term>
+ </item>
+ <item>
+ <term>"Defaultgateway"</term>
+ </item>
+ <item>
+ <term>"DHCP"</term>
+ </item>
+ <item>
+ <term>"DNS"</term>
+ </item>
+ <item>
+ <term>"WINS"</term>
+ </item>
+ <item>
+ <term>"LocalSubnet" indicates any local address on the local subnet. This token Is Not case-sensitive.</term>
+ </item>
+ <item>
+ <term>
+ A subnet can be specified using either the subnet mask Or network prefix notation. If neither a subnet mask Not a network prefix
+ Is specified, the subnet mask defaults to 255.255.255.255.
+ </term>
+ </item>
+ <item>
+ <term>A valid IPv6 address.</term>
+ </item>
+ <item>
+ <term>An IPv4 address range in the format of "start address - end address" with no spaces included.</term>
+ </item>
+ <item>
+ <term>An IPv6 address range in the format of "start address - end address" with no spaces included.</term>
+ </item>
+ </list>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.IcmpTypesAndCodes">
+ <summary>
+ <para>Specifies the list of ICMP types And codes for this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>
+ The icmpTypesAndCodes parameter Is a list of ICMP types And codes separated by semicolon. "*" indicates all ICMP types And codes.
+ </para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.Direction">
+ <summary>
+ <para>Specifies the direction of traffic for which the rule applies.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional. If this property Is Not specified, the default value Is <c>in</c>.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.Interfaces">
+ <summary>
+ <para>Specifies the list of interfaces for which the rule applies.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional. The interfaces in the list are represented by their friendly name.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.InterfaceTypes">
+ <summary>
+ <para>Specifies the list of interface types for which the rule applies.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>
+ Acceptable values for this property are "RemoteAccess", "Wireless", "Lan", And "All". If more than one interface type Is
+ specified, the strings must be separated by a comma.
+ </para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.Enabled">
+ <summary>
+ <para>Enables Or disables a rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional. A New rule Is disabled by default.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.Grouping">
+ <summary>
+ <para>Specifies the group to which an individual rule belongs.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ <para>
+ Using the Grouping property Is highly recommended, as it groups multiple rules into a single line in the Windows Firewall
+ control panel. This allows the user to enable Or disable multiple rules with a single click. The Grouping property can also be
+ specified using indirect strings. In this case, a group description can also be specified that will appear in the rule group
+ properties in the Windows Firewall control panel. For example, if the group string Is specified by an indirect string at index
+ 1005 ("@yourresources.dll,-1005"), the group description can be specified at a resource string higher by 10000 "@youresources.dll,-11005."
+ </para>
+ <para>
+ When indirect strings in the form of "h" are passed as parameters to the Windows Firewall with Advanced Security APIs, they
+ should either be placed under the System32 Windows directory Or specified by a full path. Further, the file should have a secure
+ access that permits the Local Service account read access to allow the Windows Firewall Service to read the strings. To avoid
+ non-privileged security principals from modifying the strings, the DLLs should only allow write access to the Administrator account.
+ </para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.Profiles">
+ <summary>
+ <para>Specifies the profiles to which the rule belongs.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.EdgeTraversal">
+ <summary>
+ <para>Indicates whether edge traversal Is enabled Or disabled for this rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>
+ The EdgeTraversal property indicates that specific inbound traffic Is allowed to tunnel through NATs And other edge devices
+ using the Teredo tunneling technology. In order for this setting to work correctly, the application Or service with the inbound
+ firewall rule needs to support IPv6. The primary application of this setting allows listeners on the host to be globally
+ addressable through a Teredo IPv6 address.
+ </para>
+ <para>New rules have the EdgeTraversal property disabled by default.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.Action">
+ <summary>
+ <para>Specifies the action for a rule Or default setting.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>This property Is optional.</para>
+ <para>Also see the restrictions on changing properties described in the Remarks section of the INetFwRule interface page.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.EdgeTraversalOptions">
+ <summary>
+ <para>This property can be used to access the edge properties of a firewall rule defined by NET_FW_EDGE_TRAVERSAL_TYPE.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.LocalAppPackageId">
+ <summary>
+ <para>
+ Specifies the package identifier Or the app container identifier of a process, whether from a Windows Store app Or a desktop app.
+ </para>
+ <para>This property Is read/write.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.LocalUserOwner">
+ <summary>
+ <para>Specifies the user security identifier (SID) of the user who Is the owner of the rule.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ If this rule does Not specify <c>localUserConditions</c>, all the traffic that this rule matches must be destined to Or
+ originated from this user.
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.LocalUserAuthorizedList">
+ <summary>
+ <para>Specifies a list of authorized local users for an app container.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.RemoteUserAuthorizedList">
+ <summary>
+ <para>Specifies a list of remote users who are authorized to access an app container.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.RemoteMachineAuthorizedList">
+ <summary>
+ <para>Specifies a list of remote computers which are authorized to access an app container.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRule3.SecureFlags">
+ <summary>
+ <para>
+ Specifies which firewall verifications of security levels provided by IPsec must be guaranteed to allow the collection. The
+ allowed values must correspond to those of the NET_FW_AUTHENTICATE_TYPE enumeration.
+ </para>
+ <para>This property Is read/write.</para>
+ </summary>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.GetInterfaces(Vanara.PInvoke.FirewallApi.INetFwRule)">
+ <summary>Gets the string array from the Interfaces property.</summary>
+ <param name="rule">The rule.</param>
+ <returns>A string array with zero or more elements.</returns>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INetFwRules">
+ <summary>The <c>INetFwRules</c> interface provides a collection of firewall rules.</summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwRules.Count">
+ <summary>
+ <para>Returns the number of rules in a collection.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwRules.Add(Vanara.PInvoke.FirewallApi.INetFwRule)">
+ <summary>The <c>Add</c> method adds a New rule to the collection.</summary>
+ <param name="rule">Rule to be added to the collection via an INetFwRule object.</param>
+ <remarks>
+ <para>If a rule with the same rule identifier as the one being submitted already exists, the existing rule Is overwritten.</para>
+ <para>Adding a firewall rule with a LocalAppPackageId specified can lead to unexpected behavior And Is Not supported.</para>
+ </remarks>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwRules.Remove(System.String)">
+ <summary>The <c>Remove</c> method removes a rule from the collection.</summary>
+ <param name="name">Name of the rule to remove from the collection.</param>
+ <remarks>If a rule specified by the name parameter does Not exist in the collection, the <c>Remove</c> method has no effect.</remarks>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwRules.Item(System.String)">
+ <summary>The <c>Item</c> method returns the specified rule if it Is in the collection.</summary>
+ <param name="name">Name of the rule to retrieve.</param>
+ <returns>Reference to the returned INetFwRule object.</returns>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwRules.GetEnumerator">
+ <summary>
+ <para>Returns an object supporting <c>IEnumVARIANT</c> that can be used to iterate through all the rules in the collection.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INetFwService">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered Or
+ unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>
+ The <c>INetFwService</c> interface provides access to the properties of a service that may be authorized to listen through the firewall.
+ </para>
+ </summary>
+ <remarks>
+ <para>Instances of this interface are retrieved through the INetFwServices collection.</para>
+ <para>All configuration changes take effect immediately.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwService.Name">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Retrieves the friendly name of the service.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwService.Type">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Retrieves the type of the service.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwService.Customized">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Indicates whether at least one of the ports associated with the service has been customized.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+ <remarks>
+ If a service has been customized, the values returned by the service properties do Not reflect the configuration of all the
+ ports associated with the service.
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwService.IpVersion">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Specifies the firewall IP version for which the service Is authorized.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>Only <c>NET_FW_IP_VERSION_ANY</c> Is supported.</remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwService.Scope">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Controls the network scope from which the port can listen.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>When setting the Scope property, only <c>NET_FW_SCOPE_ALL</c> And <c>NET_FW_SCOPE_LOCAL_SUBNET</c> are valid.</para>
+ <para>The default value Is <c>NET_FW_SCOPE_ALL</c> for New ports.</para>
+ <para>To create a custom scope, use the RemoteAddresses property.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwService.RemoteAddresses">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Specifies a set of the remote addresses from which the service ports can listen for traffic.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+ <remarks>
+ <para>If the service has been customized, get returns the union of the remote addresses for all the service ports.</para>
+ <para>
+ The remoteAddrs parameter consists of one Or more comma-delimited tokens specifying the remote addresses from which the
+ application can listen for traffic. The default value Is "*".
+ </para>
+ <para>Valid tokens:</para>
+ <list type="bullet">
+ <item>
+ <term>"*": any remote address; If present, it must be the only token.</term>
+ </item>
+ <item>
+ <term>"LocalSubnet": Not case-sensitive; specifying more than once has no effect.</term>
+ </item>
+ <item>
+ <term>
+ subnet: may be specified Using either subnet mask Or network prefix notation. If neither a subnet mask nor a network prefix Is
+ specified, the subnet mask defaults to 255.255.255.255. Examples of valid subnets: 10.0.0.2/255.0.0.0 10.0.0.2/8 10.0.0.2
+ </term>
+ </item>
+ <item>
+ <term>Windows Vista: A valid IPv6 address.</term>
+ </item>
+ <item>
+ <term>Windows Vista: An IPv4 address range In the format "start address - end address."</term>
+ </item>
+ <item>
+ <term>Windows Vista: An IPv6 address range In the format "start address - end address."</term>
+ </item>
+ </list>
+ <para>For a predefined address range, use the Scope property.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwService.Enabled">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Indicates whether all the ports associated with the service are enabled.</para>
+ <para>This property Is read/write.</para>
+ </summary>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwService.GloballyOpenPorts">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Retrieves the collection of globally open ports associated with the service.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INetFwServiceRestriction">
+ <summary>The <c>INetFwServiceRestriction</c> interface provides access to the Windows Service Hardening networking rules.</summary>
+ <remarks>When adding rules, note that there may be a small time lag before the newly-added rule Is applied.</remarks>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwServiceRestriction.RestrictService(System.String,System.String,System.Boolean,System.Boolean)">
+ <summary>The <c>RestrictService</c> method turns service restriction on Or off for a given service.</summary>
+ <param name="serviceName">Name of the service for which service restriction Is being turned on Or off.</param>
+ <param name="appName">Name of the application for which service restriction Is being turned on Or off.</param>
+ <param name="restrictService">
+ Indicates whether service restriction Is being turned on Or off. If this value Is true ( <c>VARIANT_TRUE</c>), the service will
+ be restricted when sending Or receiving network traffic. The Windows Service Hardening rules collection can contain rules which
+ can allow this service specific inbound Or outbound network access per specific requirements. If false ( <c>VARIANT_FALSE</c>),
+ the service Is Not restricted by Windows Service Hardening.
+ </param>
+ <param name="serviceSidRestricted">
+ Indicates the type of service SID for the specified service. If this value Is true ( <c>VARIANT_TRUE</c>), the service SID will
+ be restricted. Otherwise, it will be unrestricted.
+ </param>
+ <remarks>When adding rules, note that there may be a small time lag before the newly-added rule Is applied.</remarks>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwServiceRestriction.ServiceRestricted(System.String,System.String)">
+ <summary>
+ The <c>ServiceRestricted</c> method indicates whether service restriction rules are enabled to limit traffic to the resources
+ specified by the firewall rules.
+ </summary>
+ <param name="serviceName">Name of the service being queried concerning service restriction state.</param>
+ <param name="appName">Name of the application being queried concerning service restriction state.</param>
+ <returns>
+ Indicates whether service restriction rules are in place to restrict the specified service. If true ( <c>VARIANT_TRUE</c>),
+ service Is restricted. Otherwise, service Is Not restricted to the resources specified by firewall rules.
+ </returns>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwServiceRestriction.Rules">
+ <summary>
+ <para>Retrieves the collection of Windows Service Hardening networking rules.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INetFwServices">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered Or
+ unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>
+ The <c>INetFwServices</c> interface Is a standard Automation interface which provides access to a collection of services that may be
+ authorized to listen through the firewall.
+ </para>
+ </summary>
+ <remarks>
+ <para>An instance of this interface Is retrieved through the Services property of the INetFwProfile interface.</para>
+ <para>All configuration changes take effect immediately.</para>
+ </remarks>
+</member>
+<member name="P:Vanara.PInvoke.FirewallApi.INetFwServices.Count">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Retrieves a read-only element yielding the number of items in the collection.</para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwServices.Item(Vanara.PInvoke.FirewallApi.NET_FW_SERVICE_TYPE)">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Returns the specified service if it Is in the collection.</para>
+ </summary>
+ <param name="svcType">
+ <list type="table">
+ <listheader>
+ <term>C++</term>
+ <term>Type of service to fetch.</term>
+ </listheader>
+ <item>
+ <term>VB</term>
+ <term>Type of service to fetch. See NET_FW_SERVICE_TYPE</term>
+ </item>
+ </list>
+ </param>
+ <returns>Reference to the returned INetFwService object.</returns>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.INetFwServices.GetEnumerator">
+ <summary>
+ <para>
+ [The Windows Firewall API Is available for use in the operating systems specified in the Requirements section. It may be altered
+ Or unavailable in subsequent versions. For Windows Vista And later, use of the Windows Firewall with Advanced Security API Is recommended.]
+ </para>
+ <para>Returns an object supporting <c>IEnumVARIANT</c> that can be used to iterate through all the services in the collection.</para>
+ <para>
+ Iteration through a collection Is done using the <c>for each</c> construct in VBScript. See Iterating a Collection for an example.
+ </para>
+ <para>This property Is read-only.</para>
+ </summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NetFwAuthorizedApplication">
+ <summary>CoClass for <see cref="T:Vanara.PInvoke.FirewallApi.INetFwAuthorizedApplication"/>.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NetFwMgr">
+ <summary>CoClass for <see cref="T:Vanara.PInvoke.FirewallApi.INetFwMgr"/>.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NetFwOpenPort">
+ <summary>CoClass for <see cref="T:Vanara.PInvoke.FirewallApi.INetFwOpenPort"/>.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NetFwPolicy2">
+ <summary>CoClass for <see cref="T:Vanara.PInvoke.FirewallApi.INetFwPolicy2"/>.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NetFwProduct">
+ <summary>CoClass for <see cref="T:Vanara.PInvoke.FirewallApi.INetFwProduct"/>.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NetFwProducts">
+ <summary>CoClass for <see cref="T:Vanara.PInvoke.FirewallApi.INetFwProducts"/>.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.NetFwRule">
+ <summary>CoClass for <see cref="T:Vanara.PInvoke.FirewallApi.INetFwRule"/>.</summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CHANGE_TYPE">
+ <summary>The <c>INET_FIREWALL_AC_CHANGE_TYPE</c> enumeration specifies which type of app container change occurred.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CHANGE_TYPE.INET_FIREWALL_AC_CHANGE_INVALID">
+ <summary>This value is reserved for system use.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CHANGE_TYPE.INET_FIREWALL_AC_CHANGE_CREATE">
+ <summary>An app container was created.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CHANGE_TYPE.INET_FIREWALL_AC_CHANGE_DELETE">
+ <summary>An app container was deleted.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CHANGE_TYPE.INET_FIREWALL_AC_CHANGE_MAX">
+ <summary>Maximum value for testing purposes.</summary>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.NetworkIsolationDiagnoseConnectFailureAndGetInfo(System.String,Vanara.PInvoke.FirewallApi.NETISO_ERROR_TYPE@)">
+ <summary>
+ The <c>NetworkIsolationDiagnoseConnectFailureAndGetInfo</c> function gets information about a network isolation connection failure
+ due to a missing capability. This function can be used to identify the capabilities required to connect to a server.
+ </summary>
+ <param name="wszServerName">
+ <para>Type: <c>LPCWSTR</c></para>
+ <para>Name (or IP address literal string) of the server to which a connection was attempted.</para>
+ </param>
+ <param name="netIsoError">
+ <para>Type: <c>NETISO_ERROR_TYPE*</c></para>
+ <para>The error that has occurred, indicating which network capability was missing and thus caused the failure.</para>
+ </param>
+ <returns>
+ <para>Type: <c>DWORD</c></para>
+ <para>Returns ERROR_SUCCESS if successful, or an error value otherwise.</para>
+ </returns>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.NetworkIsolationFreeAppContainers(System.IntPtr)">
+ <summary>
+ The <c>NetworkIsolationFreeAppContainers</c> function is used to release memory resources allocated to one or more app containers
+ </summary>
+ <param name="pPublicAppCs">
+ <para>Type: <c>PINET_FIREWALL_APP_CONTAINER</c></para>
+ <para>The app container memory resources to be freed.</para>
+ </param>
+ <returns>
+ <para>Type: <c>DWORD</c></para>
+ <para>Returns ERROR_SUCCESS if successful, or an error value otherwise.</para>
+ </returns>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.NetworkIsolationGetAppContainerConfig(System.UInt32@,System.IntPtr@)">
+ <summary>
+ The <c>NetworkIsolationGetAppContainerConfig</c> function is used to retrieve configuration information about one or more app containers.
+ </summary>
+ <param name="pdwNumPublicAppCs">
+ <para>Type: <c>DWORD*</c></para>
+ <para>The number of app containers in the <c>appContainerSids</c> member.</para>
+ </param>
+ <param name="appContainerSids">
+ <para>Type: <c>PSID_AND_ATTRIBUTES*</c></para>
+ <para>The security identifiers (SIDs) of app containers that are allowed to send loopback traffic. Used for debugging purposes.</para>
+ </param>
+ <returns>
+ <para>Type: <c>DWORD</c></para>
+ <para>Returns ERROR_SUCCESS if successful, or an error value otherwise.</para>
+ </returns>
+ <remarks>
+ <para>
+ Note that it is the calling program's responsibility to free the memory associated with the PSID_AND_ATTRIBUTES structure. The
+ following code sample shows how to call this function. The FreeAppContainerConfig function shows how to free all of the associated memory.
+ </para>
+ <para>
+ <code> #include "stdafx.h" #include &lt;netfw.h&gt; typedef DWORD (WINAPI *FN_NETWORKISOLATIONGETAPPCONTAINERCONFIG)( _Out_ DWORD *pdwNumPublicAppCs, _Outptr_result_buffer_(*pdwNumPublicAppCs) PSID_AND_ATTRIBUTES *appContainerSids ); void FreeAppContainerConfig( __in DWORD sidCount, __in_ecount(sidCount) SID_AND_ATTRIBUTES *srcSidAttrib ) { DWORD dwIndex = 0; for (dwIndex = 0; dwIndex &lt; sidCount; dwIndex++) { HeapFree(GetProcessHeap(), 0, srcSidAttrib[dwIndex].Sid); } HeapFree(GetProcessHeap(), 0, srcSidAttrib); } int _tmain(int argc, _TCHAR* argv[]) { DWORD dwErr = 0; PSID_AND_ATTRIBUTES appContainerSids = NULL; DWORD dwCount = 0; HMODULE hModule = NULL; FN_NETWORKISOLATIONGETAPPCONTAINERCONFIG pfnNetworkIsolationGetAppContainerConfig = NULL; hModule = LoadLibraryW(L"FirewallAPI.dll"); if (hModule == NULL) { dwErr = GetLastError(); goto Cleanup; } pfnNetworkIsolationGetAppContainerConfig = (FN_NETWORKISOLATIONGETAPPCONTAINERCONFIG)GetProcAddress( hModule, "NetworkIsolationGetAppContainerConfig" ); if (pfnNetworkIsolationGetAppContainerConfig == NULL) { dwErr = GetLastError(); goto Cleanup; } dwErr = pfnNetworkIsolationGetAppContainerConfig( &amp;dwCount, &amp;appContainerSids ); if (dwErr != ERROR_SUCCESS) { goto Cleanup; } // Process the app container sids Cleanup: FreeAppContainerConfig( dwCount, appContainerSids ); if (hModule != NULL) { FreeLibrary(hModule); } return 0; }</code>
+ </para>
+ </remarks>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.NetworkIsolationRegisterForAppContainerChanges(Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CREATION_TYPE,Vanara.PInvoke.FirewallApi.PAC_CHANGES_CALLBACK_FN,System.IntPtr,Vanara.PInvoke.HANDLE@)">
+ <summary>
+ The <c>NetworkIsolationRegisterForAppContainerChanges</c> function is used to register for the delivery of notifications regarding
+ changes to an app container.
+ </summary>
+ <param name="flags">
+ <para>Type: <c>DWORD</c></para>
+ <para>A bitmask value of control flags which specify when to receive notifications. May contain one or more of the following flags.</para>
+ <list type="table">
+ <listheader>
+ <term>Value</term>
+ <term>Meaning</term>
+ </listheader>
+ <item>
+ <term>INET_FIREWALL_AC_NONE 0x00</term>
+ <term>No notifications will be delivered.</term>
+ </item>
+ <item>
+ <term>INET_FIREWALL_AC_PACKAGE_ID_ONLY 0x01</term>
+ <term>Notifications will be delivered when an app container is created with a package identifier.</term>
+ </item>
+ <item>
+ <term>INET_FIREWALL_AC_BINARY 0x02</term>
+ <term>Notifications will be delivered when an app container is created with a binary path.</term>
+ </item>
+ <item>
+ <term>INET_FIREWALL_AC_MAX 0x04</term>
+ <term>Maximum value for testing purposes.</term>
+ </item>
+ </list>
+ </param>
+ <param name="callback">
+ <para>Type: <c>PAC_CHANGES_CALLBACK_FN</c></para>
+ <para>Function pointer that will be invoked when a notification is ready for delivery.</para>
+ </param>
+ <param name="context">
+ <para>Type: <c>PVOID</c></para>
+ <para>Optional context pointer. This pointer is passed to the callback function along with details of the change.</para>
+ </param>
+ <param name="registrationObject">
+ <para>Type: <c>HANDLE*</c></para>
+ <para>Handle to the newly created registration.</para>
+ </param>
+ <returns>
+ <para>Type: <c>DWORD</c></para>
+ <para>Returns ERROR_SUCCESS if successful, or an error value otherwise.</para>
+ </returns>
+</member>
+<member name="M:Vanara.PInvoke.FirewallApi.NetworkIsolationUnregisterForAppContainerChanges(Vanara.PInvoke.HANDLE)">
+ <summary>
+ The <c>NetworkIsolationUnregisterForAppContainerChanges</c> function is used to cancel an app container change registration and stop
+ receiving notifications.
+ </summary>
+ <param name="registrationObject">
+ <para>Type: <c>HANDLE</c></para>
+ <para>Handle to the previously created registration.</para>
+ </param>
+ <returns>
+ <para>Type: <c>DWORD</c></para>
+ <para>Returns ERROR_SUCCESS if successful, or an error value otherwise.</para>
+ </returns>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CAPABILITIES">
+ <summary>The <c>INET_FIREWALL_AC_CAPABILITIES</c> structure contains information about the capabilities of an app container.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CAPABILITIES.count">
+ <summary>
+ <para>Type: <c>DWORD</c></para>
+ <para>The number of security identifiers (SIDs) in the <c>capabilities</c> member.</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_AC_CAPABILITIES.capabilities">
+ <summary>
+ <para>Type: <c>SID_AND_ATTRIBUTES*</c></para>
+ <para>Security information related to the app container's capabilities.</para>
+ </summary>
+</member>
+<member name="T:Vanara.PInvoke.FirewallApi.INET_FIREWALL_APP_CONTAINER">
+ <summary>The <c>INET_FIREWALL_APP_CONTAINER</c> structure contains information about an specific app container.</summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_APP_CONTAINER.appContainerSid">
+ <summary>
+ <para>Type: <c>SID*</c></para>
+ <para>The package identifier of the app container</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_APP_CONTAINER.userSid">
+ <summary>
+ <para>Type: <c>SID*</c></para>
+ <para>The security identifier (SID) of the user to whom the app container belongs.</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_APP_CONTAINER.appContainerName">
+ <summary>
+ <para>Type: <c>LPWSTR</c></para>
+ <para>The app container's globally unique name.</para>
+ <para>Also referred to as the Package Family Name, for the app container of a Windows Store app.</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_APP_CONTAINER.displayName">
+ <summary>
+ <para>Type: <c>LPWSTR</c></para>
+ <para>Friendly name of the app container</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_APP_CONTAINER.description">
+ <summary>
+ <para>Type: <c>LPWSTR</c></para>
+ <para>A description of the app container (its use, the objective of the application that uses it, etc.)</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_APP_CONTAINER.capabilities">
+ <summary>
+ <para>Type: <c>INET_FIREWALL_AC_CAPABILITIES</c></para>
+ <para>The capabilities of the app container.</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_APP_CONTAINER.binaries">
+ <summary>
+ <para>Type: <c>INET_FIREWALL_AC_BINARIES</c></para>
+ <para>Binary paths to the applications running in the app container.</para>
+ </summary>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_APP_CONTAINER.workingDirectory">
+ <summary/>
+</member>
+<member name="F:Vanara.PInvoke.FirewallApi.INET_FIREWALL_APP_CONTAINER.packageFullName">
+ <summary/>
+</member>
+</members>
+</doc>
